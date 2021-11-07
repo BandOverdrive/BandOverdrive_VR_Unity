@@ -11,17 +11,26 @@ public class DrumkitPlayer : MonoBehaviour
     };
 
     public Controller m_Controller = Controller.Left;
+    public GameObject m_KickSurface;
+
+    private AudioSource m_KickAudio;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_KickAudio = m_KickSurface.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // Kick
+        if (OVRInput.GetDown(OVRInput.Button.One))
+        {
+            m_KickAudio.Play();
+
+            // Generate KICK NOTE
+        }
     }
 
     private void OnTriggerEnter(Collider other)
