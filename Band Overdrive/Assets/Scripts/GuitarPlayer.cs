@@ -19,27 +19,24 @@ public class GuitarPlayer : MonoBehaviour
     {
         // Position
         Vector3 guitarPos = m_CenterEyeTransform.transform.position;
-        float posY = m_CenterEyeTransform.transform.position.y;
-        guitarPos.x = transform.position.x;
+        guitarPos.x = transform.position.x + 0.06f;
+        guitarPos.y -= 0.3f * guitarPos.y;
         guitarPos.z = transform.position.z;
-        guitarPos.x += 0.06f;
-        guitarPos.y -= 0.3f * posY;
         m_Guitar.transform.position = guitarPos;
 
         // Rotation
         int boneID = (int)OVRPlugin.BoneId.Hand_Index1;
         if (m_LeftHandSkeleton.Bones.Count > boneID)
         {
-            OVRBone posBone = m_LeftHandSkeleton.Bones[boneID];
             if (m_LeftHandSkeleton.gameObject.GetComponent<OVRHand>().IsDataHighConfidence)
             {
-                Vector3 lThumbPos = posBone.Transform.position;
-                lThumbPos.y += 0.05f;
-                Vector3 lHandDir = lThumbPos - guitarPos;
+                Vector3 lBonePos = m_LeftHandSkeleton.Bones[boneID].Transform.position;
+                lBonePos.y += 0.05f;
+                Vector3 lHandDir = lBonePos - guitarPos;
                 if (lHandDir.y > -0.05f)
                 {
                     Quaternion rot = Quaternion.FromToRotation(Vector3.forward, lHandDir);
-                    rot = Quaternion.Euler(rot.eulerAngles.x, rot.eulerAngles.y, 100);
+                    rot = Quaternion.Euler(rot.eulerAngles.x, rot.eulerAngles.y, 100.0f);
                     m_Guitar.transform.rotation = rot;
                 }
             }

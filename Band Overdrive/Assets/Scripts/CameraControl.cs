@@ -20,8 +20,8 @@ public class CameraControl : MonoBehaviour
             m_YDownTime = Time.time;
         if (OVRInput.Get(OVRInput.RawButton.Y))
         {
-            float xTime = Time.time - m_YDownTime;
-            if (xTime > 1.5f)
+            float yTime = Time.time - m_YDownTime;
+            if (yTime > 1.5f)
                 OVRManager.display.RecenterPose();
         }
     }
