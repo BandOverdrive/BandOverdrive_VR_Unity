@@ -18,7 +18,7 @@ public class GuitarPlayer : MonoBehaviour
     void Update()
     {
         // Position
-        Vector3 guitarPos = m_CenterEyeTransform.transform.position;
+        Vector3 guitarPos = m_CenterEyeTransform.position;
         guitarPos.x = transform.position.x + 0.06f;
         guitarPos.y -= 0.3f * guitarPos.y;
         guitarPos.z = transform.position.z;

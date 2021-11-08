@@ -10,7 +10,7 @@ public class Guitar : MonoBehaviour
     public GuitarButton m_BlueButton;
     public GuitarButton m_OrangeButton;
 
-    public OVRSkeleton m_LeftHandSkeleton;
+    public OVRHand m_LeftHand;
 
     // Start is called before the first frame update
     void Start()
@@ -21,20 +21,20 @@ public class Guitar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!m_LeftHandSkeleton.gameObject.GetComponent<OVRHand>().IsDataHighConfidence)
+        if (!m_LeftHand.IsDataHighConfidence)
         {
-            m_GreenButton.setUnpressed();
-            m_RedButton.setUnpressed();
-            m_YellowButton.setUnpressed();
-            m_BlueButton.setUnpressed();
-            m_OrangeButton.setUnpressed();
+            m_GreenButton.SetUnpressed();
+            m_RedButton.SetUnpressed();
+            m_YellowButton.SetUnpressed();
+            m_BlueButton.SetUnpressed();
+            m_OrangeButton.SetUnpressed();
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         string name = other.gameObject.name;
-        if (name.Contains("Hand_Thumb0_CapsuleCollider"))
+        if (name.Contains("Hand_Thumb3_CapsuleCollider"))
         {
             if (m_GreenButton.IsPressed())
             {

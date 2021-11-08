@@ -49,11 +49,14 @@ public class GuitarButton : MonoBehaviour
     {
         string name = collider.gameObject.name;
         if (name.Contains("3_CapsuleCollider"))
-            return true;
+        {
+            if (!name.Contains("Hand_Thumb3_CapsuleCollider"))
+                return true;
+        }
         return false;
     }
 
-    public void setUnpressed()
+    public void SetUnpressed()
     {
         m_PressingCount = 0;
     }
