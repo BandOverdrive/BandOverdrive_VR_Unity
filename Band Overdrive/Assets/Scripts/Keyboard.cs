@@ -44,21 +44,12 @@ public class Keyboard : MonoBehaviour
             }
         }
 
-    }
-
-    private void OnTriggerEnter(Collider col)
-    {
-        string name = col.gameObject.name;
-        if (name.Contains("3_CapsuleCollider"))
+        for (int i = 0; i < m_KeyButtons.Length; i++)
         {
-            for (int i = 0; i < m_KeyButtons.Length; i++)
-            {
-                if (m_KeyButtons[i].IsPressed())
-                    m_IsNotesPressed[i] = true;
-                else
-                    m_IsNotesPressed[i] = false;
-            }
+            if (m_KeyButtons[i].IsPressed())
+                m_IsNotesPressed[i] = true;
+            else
+                m_IsNotesPressed[i] = false;
         }
-
     }
 }
