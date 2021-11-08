@@ -2067,6 +2067,7 @@ MonoBehaviour:
   - {fileID: 5913263809681569205}
   - {fileID: 140076091817515791}
   - {fileID: 606717428065654982}
+  m_IsNotesPressed: 000000000000000000000000000000
   m_LeftHandSkeleton: {fileID: 1179203735}
   m_RightHandSkeleton: {fileID: 1737502501}
 --- !u!4 &919320970986584252
