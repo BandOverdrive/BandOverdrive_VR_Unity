@@ -39,22 +39,27 @@ public class Guitar : MonoBehaviour
             if (m_GreenButton.IsPressed())
             {
                 // GREEN NOTE
+                m_GreenButton.GetComponent<Animator>().Play("Hit");
             }
             if (m_RedButton.IsPressed())
             {
                 // RED NOTE
+                m_RedButton.GetComponent<Animator>().Play("Hit");
             }
             if (m_YellowButton.IsPressed())
             {
                 // YELLOW NOTE
+                m_YellowButton.GetComponent<Animator>().Play("Hit");
             }
             if (m_BlueButton.IsPressed())
             {
                 // BLUE NOTE
+                m_BlueButton.GetComponent<Animator>().Play("Hit");
             }
             if (m_OrangeButton.IsPressed())
             {
                 // ORANGE NOTE
+                m_OrangeButton.GetComponent<Animator>().Play("Hit");
             }
         }
     }

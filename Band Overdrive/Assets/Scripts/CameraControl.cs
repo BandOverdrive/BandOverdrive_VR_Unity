@@ -22,7 +22,10 @@ public class CameraControl : MonoBehaviour
         {
             float yTime = Time.time - m_YDownTime;
             if (yTime > 1.5f)
+            {
                 OVRManager.display.RecenterPose();
+                m_YDownTime = Time.time;
+            }
         }
     }
 }

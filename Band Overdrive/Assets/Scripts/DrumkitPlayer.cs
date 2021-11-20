@@ -15,6 +15,12 @@ public class DrumkitPlayer : MonoBehaviour
     public Animator m_KickAnimator;
     public HihatControl m_HihatControl;
 
+    public GameObject m_RedButton;
+    public GameObject m_YellowButton;
+    public GameObject m_BlueButton;
+    public GameObject m_GreenButton;
+    public GameObject m_OrangeButton;
+
     private AudioSource m_KickAudio;
 
     // Start is called before the first frame update
@@ -35,6 +41,7 @@ public class DrumkitPlayer : MonoBehaviour
                 m_KickAudio.Play();
                 m_KickAnimator.Play("Drum_KickBeat");
                 // Generate KICK NOTE
+                m_OrangeButton.GetComponent<Animator>().Play("Hit");
             }
 
             // Hihat
@@ -72,38 +79,47 @@ public class DrumkitPlayer : MonoBehaviour
         {
             case "S_SNARE":
                 // RED NOTE
+                m_RedButton.GetComponent<Animator>().Play("Hit");
                 break;
             case "S_TOM1":
                 // YELLOW NOTE
+                m_YellowButton.GetComponent<Animator>().Play("Hit");
                 break;
             case "S_TOM2":
             case "S_LFLOOR":
                 // BLUE NOTE
+                m_BlueButton.GetComponent<Animator>().Play("Hit");
                 break;
             case "S_FLOOR1":
             case "S_FLOOR2":
                 // GREEN NOTE
+                m_GreenButton.GetComponent<Animator>().Play("Hit");
                 break;
             case "S_HIHAT":
                 if (m_HihatControl.IsOpened())
                 {
                     // BLUE ROUNDED NOTE
+                    m_BlueButton.GetComponent<Animator>().Play("Hit");
                 }
                 else
                 {
                     // YELLOW ROUNDED NOTE
+                    m_YellowButton.GetComponent<Animator>().Play("Hit");
                 }
                 break;
             case "S_CRASH1":
                 // YELLOW ROUNDED NOTE
+                m_YellowButton.GetComponent<Animator>().Play("Hit");
                 break;
             case "S_RIDE":
             case "S_LCRASH":
             case "S_CHINA":
                 // BLUE ROUNDED NOTE
+                m_BlueButton.GetComponent<Animator>().Play("Hit");
                 break;
             case "S_CRASH2":
                 // GREEN ROUNDED NOTE
+                m_GreenButton.GetComponent<Animator>().Play("Hit");
                 break;
 
             default:

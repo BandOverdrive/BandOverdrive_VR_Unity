@@ -24,9 +24,9 @@ public class GuitarButton : MonoBehaviour
             m_IsPressed = false;
 
         if (m_IsPressed)
-            gameObject.GetComponent<Renderer>().material.color = Color.red;
+            gameObject.GetComponent<Animator>().Play("Press");
         else
-            gameObject.GetComponent<Renderer>().material.color = Color.white;
+            gameObject.GetComponent<Animator>().Play("Idle");
     }
 
     private void OnTriggerEnter(Collider other)
