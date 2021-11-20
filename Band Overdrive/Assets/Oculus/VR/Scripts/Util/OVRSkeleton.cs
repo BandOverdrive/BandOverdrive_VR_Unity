@@ -313,7 +313,8 @@ public class OVRSkeleton : MonoBehaviour
 				var delta = p1 - p0;
 				var mag = delta.magnitude;
 				var rot = Quaternion.FromToRotation(Vector3.right, delta);
-				capsule.CapsuleCollider.radius = _skeleton.BoneCapsules[i].Radius;
+				//capsule.CapsuleCollider.radius = _skeleton.BoneCapsules[i].Radius;
+				capsule.CapsuleCollider.radius = 0.001f;
 				capsule.CapsuleCollider.height = mag + _skeleton.BoneCapsules[i].Radius * 2.0f;
 				capsule.CapsuleCollider.direction = 0;
 				capsule.CapsuleCollider.center = Vector3.right * mag * 0.5f;

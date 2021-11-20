@@ -32,6 +32,7 @@ public class GuitarPlayer : MonoBehaviour
             {
                 Vector3 lBonePos = m_LeftHandSkeleton.Bones[boneID].Transform.position;
                 lBonePos.y += 0.05f;
+                //lBonePos.x -= 0.03f;
                 Vector3 lHandDir = lBonePos - guitarPos;
                 if (lHandDir.y > -0.05f)
                 {

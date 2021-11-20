@@ -12,6 +12,8 @@ public class DrumkitPlayer : MonoBehaviour
 
     public Controller m_Controller = Controller.Left;
     public GameObject m_KickSurface;
+    public Animator m_KickAnimator;
+    public HihatControl m_HihatControl;
 
     private AudioSource m_KickAudio;
 
@@ -24,12 +26,22 @@ public class DrumkitPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Kick
-        if (OVRInput.GetDown(OVRInput.Button.One))
+        if (m_Controller == Controller.Right)
         {
-            m_KickAudio.Play();
+            // Kick
+            if (Input.GetKeyDown(KeyCode.Space)
+                || OVRInput.GetDown(OVRInput.Button.One))
+            {
+                m_KickAudio.Play();
+                m_KickAnimator.Play("Drum_KickBeat");
+                // Generate KICK NOTE
+            }
 
-            // Generate KICK NOTE
+            // Hihat
+            if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
+                m_HihatControl.Close();
+            if (OVRInput.GetUp(OVRInput.RawButton.RIndexTrigger))
+                m_HihatControl.Open();
         }
     }
 
@@ -45,6 +57,11 @@ public class DrumkitPlayer : MonoBehaviour
             return;
         if (magnitude < 0.2f)
             return;
+
+        // Haptics
+        if (magnitude > 1.0f)
+            magnitude = 1.0f;
+        Haptics(1, magnitude, 0.03f, c);
 
         // Sound
         other.gameObject.GetComponent<AudioSource>().Play();
@@ -68,6 +85,15 @@ public class DrumkitPlayer : MonoBehaviour
                 // GREEN NOTE
                 break;
             case "S_HIHAT":
+                if (m_HihatControl.IsOpened())
+                {
+                    // BLUE ROUNDED NOTE
+                }
+                else
+                {
+                    // YELLOW ROUNDED NOTE
+                }
+                break;
             case "S_CRASH1":
                 // YELLOW ROUNDED NOTE
                 break;
@@ -83,5 +109,19 @@ public class DrumkitPlayer : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private IEnumerator VibrateRoutine(float frequency, float amplitude, float duration,
+        OVRInput.Controller controllerMask = OVRInput.Controller.Active)
+    {
+        OVRInput.SetControllerVibration(frequency, amplitude, controllerMask);
+        yield return new WaitForSeconds(duration);
+        OVRInput.SetControllerVibration(0, 0, controllerMask);
+    }
+
+    private void Haptics(float frequency, float amplitude, float duration,
+        OVRInput.Controller controllerMask = OVRInput.Controller.Active)
+    {
+        StartCoroutine(VibrateRoutine(frequency, amplitude, duration, controllerMask));
     }
 }

@@ -4,21 +4,39 @@ using UnityEngine;
 
 public class KeyboardButton : MonoBehaviour
 {
+    public OVRHand m_LeftHand;
+    public OVRHand m_RightHand;
+
+    private int m_PressingCountL;
+    private int m_PressingCountR;
     private int m_PressingCount;
     private bool m_IsPressed;
+
+    private GameObject m_keyMesh;
     private Vector3 m_ButtonPosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_IsPressed = false;
+        m_PressingCountL = 0;
+        m_PressingCountR = 0;
         m_PressingCount = 0;
-        m_ButtonPosition = gameObject.transform.position;
+        m_IsPressed = false;
+
+        m_keyMesh = gameObject.transform.GetChild(0).gameObject;
+        m_ButtonPosition = m_keyMesh.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!m_LeftHand.IsDataHighConfidence)
+            m_PressingCountL = 0;
+        if (!m_RightHand.IsDataHighConfidence)
+            m_PressingCountR = 0;
+
+        m_PressingCount = m_PressingCountL + m_PressingCountR;
+
         if (m_PressingCount > 0)
             m_IsPressed = true;
         else
@@ -26,50 +44,66 @@ public class KeyboardButton : MonoBehaviour
 
         if (m_IsPressed)
         {
-            gameObject.GetComponent<Renderer>().material.color = Color.blue;
-            gameObject.transform.position = m_ButtonPosition + new Vector3(0.0f, -0.01f, 0.0f);
+            //m_keyMesh.GetComponent<Renderer>().material.color = Color.blue;
+            m_keyMesh.transform.position = m_ButtonPosition + new Vector3(0.0f, -0.01f, 0.0f);
         }
         else
         {
-            gameObject.GetComponent<Renderer>().material.color = Color.white;
-            gameObject.transform.position = m_ButtonPosition;
+            //m_keyMesh.GetComponent<Renderer>().material.color = Color.white;
+            m_keyMesh.transform.position = m_ButtonPosition;
         }
     }
 
-    private void OnTriggerEnter(Collider col)
+    private void OnTriggerEnter(Collider other)
     {
-        if (IsFingerTip(col))
+        if (IsFingerTip(other))
         {
-            m_PressingCount++;
+            if (m_PressingCount == 0)
+            {
+                // Generate note
+                //string noteName = gameObject.name;
+                //Debug.Log(noteName);
+            }
+            if (IsLeftHand(other))
+                m_PressingCountL++;
+            else
+                m_PressingCountR++;
         }
     }
 
-    private void OnTriggerExit(Collider col)
+    private void OnTriggerExit(Collider other)
     {
-        if (IsFingerTip(col))
+        if (IsFingerTip(other))
         {
-            m_PressingCount--;
-            if (m_PressingCount < 0)
-                m_PressingCount = 0;
+            if (IsLeftHand(other))
+                m_PressingCountL--;
+            else
+                m_PressingCountR--;
+
+            if (m_PressingCountL < 0)
+                m_PressingCountL = 0;
+            if (m_PressingCountR < 0)
+                m_PressingCountR = 0;
         }
     }
 
-    private bool IsFingerTip(Collider col)
+    private bool IsFingerTip(Collider collider)
     {
-        string name = col.gameObject.name;
+        string name = collider.gameObject.name;
         if (name.Contains("3_CapsuleCollider"))
             return true;
         else 
             return false;
     }
 
-    public void SetUnpressed()
+    private bool IsLeftHand(Collider collider)
     {
-        m_PressingCount = 0;
-    }
-
-    public bool IsPressed()
-    {
-        return m_IsPressed;
+        GameObject handPrefab = collider.transform.parent.parent.parent.gameObject;
+        OVRSkeleton.SkeletonType type =
+            handPrefab.GetComponent<OVRSkeleton>().GetSkeletonType();
+        if (type == OVRSkeleton.SkeletonType.HandLeft)
+            return true;
+        else
+            return false;
     }
 }
