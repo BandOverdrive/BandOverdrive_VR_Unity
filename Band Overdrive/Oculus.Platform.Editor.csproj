@@ -47,10 +47,10 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Oculus\Platform\Editor\OculusPlatformSettingsEditor.cs" />
      <Compile Include="Assets\Oculus\Platform\Editor\GUIHelper.cs" />
-     <Compile Include="Assets\Oculus\Platform\Editor\OculusStandalonePlatformResponse.cs" />
      <Compile Include="Assets\Oculus\Platform\Editor\OculusPluginUpdaterStub.cs" />
+     <Compile Include="Assets\Oculus\Platform\Editor\OculusPlatformSettingsEditor.cs" />
+     <Compile Include="Assets\Oculus\Platform\Editor\OculusStandalonePlatformResponse.cs" />
      <None Include="Assets\Oculus\Platform\Editor\Oculus.Platform.Editor.asmdef" />
  <Reference Include="UnityEngine">
  <HintPath>D:/Program Files/Unity Hub/2020.3.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

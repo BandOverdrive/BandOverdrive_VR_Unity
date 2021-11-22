@@ -47,16 +47,16 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AudioManager.cs" />
      <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AudioManager_Sound.cs" />
-     <Compile Include="Assets\Oculus\AudioManager\Scripts\Utils\FastList.cs" />
      <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\SoundFXRef.cs" />
      <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\SoundFX.cs" />
+     <Compile Include="Assets\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
+     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AudioManager.cs" />
+     <Compile Include="Assets\Oculus\AudioManager\Scripts\Utils\FastList.cs" />
      <Compile Include="Assets\Oculus\AudioManager\Scripts\Utils\InspectorNoteAttribute.cs" />
      <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\MinMaxAttribute.cs" />
      <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AmbienceEmitter.cs" />
      <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\SoundEmitter.cs" />
-     <Compile Include="Assets\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
      <None Include="Assets\Oculus\AudioManager\Oculus.AudioManager.asmdef" />
  <Reference Include="UnityEngine">
  <HintPath>D:/Program Files/Unity Hub/2020.3.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

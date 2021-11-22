@@ -47,28 +47,28 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Oculus\VR\Editor\OVRLayerAttributeEditor.cs" />
      <Compile Include="Assets\Oculus\VR\Editor\OVRPlatformToolSettings.cs" />
-     <Compile Include="Assets\Oculus\VR\Editor\OVRProjectConfig.cs" />
-     <Compile Include="Assets\Oculus\VR\Editor\OVRShaderBuildProcessor.cs" />
-     <Compile Include="Assets\Oculus\VR\Editor\OVRSystemProfilerPanel.cs" />
      <Compile Include="Assets\Oculus\VR\Editor\OVRPlatformTool.cs" />
-     <Compile Include="Assets\Oculus\VR\Editor\OVRBundleManager.cs" />
-     <Compile Include="Assets\Oculus\VR\Editor\OVRPluginUpdaterStub.cs" />
      <Compile Include="Assets\Oculus\VR\Editor\PathHelper.cs" />
      <Compile Include="Assets\Oculus\VR\Editor\OVRADBTool.cs" />
      <Compile Include="Assets\Oculus\VR\Editor\OVRLint.cs" />
-     <Compile Include="Assets\Oculus\VR\Editor\OVRDeviceSelector.cs" />
      <Compile Include="Assets\Oculus\VR\Editor\OVRGradleGeneration.cs" />
-     <Compile Include="Assets\Oculus\VR\Editor\OVRManifestPreprocessor.cs" />
      <Compile Include="Assets\Oculus\VR\Editor\OVRScreenshotWizard.cs" />
-     <Compile Include="Assets\Oculus\VR\Editor\OVRExpansionFileGenerator.cs" />
      <Compile Include="Assets\Oculus\VR\Editor\OVRBuild.cs" />
-     <Compile Include="Assets\Oculus\VR\Editor\OVREngineConfigurationUpdater.cs" />
      <Compile Include="Assets\Oculus\VR\Editor\OVRBundleTool.cs" />
+     <Compile Include="Assets\Oculus\VR\Editor\OVRPluginUpdater.cs" />
+     <Compile Include="Assets\Oculus\VR\Editor\OVRLayerAttributeEditor.cs" />
+     <Compile Include="Assets\Oculus\VR\Editor\OVRProjectConfig.cs" />
+     <Compile Include="Assets\Oculus\VR\Editor\OVRShaderBuildProcessor.cs" />
+     <Compile Include="Assets\Oculus\VR\Editor\OVRSystemProfilerPanel.cs" />
+     <Compile Include="Assets\Oculus\VR\Editor\OVRBundleManager.cs" />
+     <Compile Include="Assets\Oculus\VR\Editor\OVRPluginUpdaterStub.cs" />
+     <Compile Include="Assets\Oculus\VR\Editor\OVRDeviceSelector.cs" />
+     <Compile Include="Assets\Oculus\VR\Editor\OVRManifestPreprocessor.cs" />
+     <Compile Include="Assets\Oculus\VR\Editor\OVRExpansionFileGenerator.cs" />
+     <Compile Include="Assets\Oculus\VR\Editor\OVREngineConfigurationUpdater.cs" />
      <Compile Include="Assets\Oculus\VR\Editor\OVRConfig.cs" />
      <Compile Include="Assets\Oculus\VR\Editor\OVRDirectorySyncer.cs" />
-     <Compile Include="Assets\Oculus\VR\Editor\OVRPluginUpdater.cs" />
      <None Include="Assets\Oculus\VR\Editor\Oculus.VR.Editor.asmdef" />
      <None Include="Assets\Oculus\VR\Editor\network_sec_config.xml" />
      <None Include="Assets\Oculus\VR\Editor\AndroidManifest.OVRSubmission.xml" />
