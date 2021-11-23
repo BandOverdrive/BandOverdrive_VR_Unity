@@ -2198,7 +2198,7 @@ MonoBehaviour:
   - {fileID: 1869713074}
   - {fileID: 302527523}
   songDelayInSeconds: 0
-  marginOfError: 0.2
+  marginOfError: 0.07
   inputDelayInMilliseconds: 0
   fileLocation: notes.mid
   noteTime: 1
