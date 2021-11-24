@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GuitarButton : MonoBehaviour
+public class GuitarButton : HitButton
 {
-    private bool m_IsPressed;
+    //private bool m_IsPressed;
     private int m_PressingCount;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_IsPressed = false;
+        setPressed(false);
         m_PressingCount = 0;
     }
 
@@ -19,11 +19,11 @@ public class GuitarButton : MonoBehaviour
     void Update()
     {
         if (m_PressingCount > 0)
-            m_IsPressed = true;
+            setPressed(true);
         else
-            m_IsPressed = false;
+            setPressed(false);
 
-        if (m_IsPressed)
+        if (IsPressed())
             gameObject.GetComponent<Animator>().Play("Press");
         else
             gameObject.GetComponent<Animator>().Play("Idle");
@@ -61,8 +61,8 @@ public class GuitarButton : MonoBehaviour
         m_PressingCount = 0;
     }
 
-    public bool IsPressed()
-    {
-        return m_IsPressed;
-    }
+    //public bool IsPressed()
+    //{
+    //    return m_IsPressed;
+    //}
 }
