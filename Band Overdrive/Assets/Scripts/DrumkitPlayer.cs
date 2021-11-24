@@ -15,17 +15,11 @@ public class DrumkitPlayer : MonoBehaviour
     public Animator m_KickAnimator;
     public HihatControl m_HihatControl;
 
-    //public GameObject m_RedButton;
-    //public GameObject m_YellowButton;
-    //public GameObject m_BlueButton;
-    //public GameObject m_GreenButton;
-    //public GameObject m_OrangeButton;
-
-    public DrumButton m_RedButton;
-    public DrumButton m_YellowButton;
-    public DrumButton m_BlueButton;
-    public DrumButton m_GreenButton;
-    public DrumButton m_OrangeButton;
+    public HitButton m_RedButton;
+    public HitButton m_YellowButton;
+    public HitButton m_BlueButton;
+    public HitButton m_GreenButton;
+    public HitButton m_OrangeButton;
 
     private AudioSource m_KickAudio;
 
@@ -44,7 +38,7 @@ public class DrumkitPlayer : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space)
                 || OVRInput.GetDown(OVRInput.Button.One))
             {
-                m_KickAudio.Play();
+                //m_KickAudio.Play();
                 m_KickAnimator.Play("Drum_KickBeat");
                 // Generate KICK NOTE
                 m_OrangeButton.GetComponent<Animator>().Play("Hit");
@@ -84,7 +78,7 @@ public class DrumkitPlayer : MonoBehaviour
         Haptics(1, magnitude, 0.03f, c);
 
         // Sound
-        other.gameObject.GetComponent<AudioSource>().Play();
+        //other.gameObject.GetComponent<AudioSource>().Play();
 
         // Note Generation
         string name = other.gameObject.name;

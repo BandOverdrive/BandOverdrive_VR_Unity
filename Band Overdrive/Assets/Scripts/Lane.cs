@@ -9,7 +9,7 @@ public class Lane : MonoBehaviour
     public Melanchall.DryWetMidi.MusicTheory.NoteName noteRestriction;
     //public KeyCode input; // this is keyboard input
     //public GuitarButton btnInput; // this is vr button input
-    public DrumButton btnInput;
+    public HitButton btnInput;
     public GameObject notePrefab;
     List<Note> notes = new List<Note>();
     public List<double> timeStamps = new List<double>();  // array of exact time for each note should be tapped
@@ -22,14 +22,14 @@ public class Lane : MonoBehaviour
         
     }
 
-    public void SetTimeStamps(Melanchall.DryWetMidi.Interaction.Note[] array)
+    public void SetTimeStamps(Melanchall.DryWetMidi.Interaction.Note[] array, double delay)
     {
         foreach (var note in array)
         {
             if (note.NoteName == noteRestriction)
             {
                 var metricTimeSpan = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, SongManager.midiFile.GetTempoMap());
-                timeStamps.Add((double)metricTimeSpan.Minutes * 60f + metricTimeSpan.Seconds + (double)metricTimeSpan.Milliseconds / 1000f); 
+                timeStamps.Add((double)metricTimeSpan.Minutes * 60f + metricTimeSpan.Seconds + (double)metricTimeSpan.Milliseconds / 1000f + delay); 
             }
         }
     }
@@ -54,7 +54,7 @@ public class Lane : MonoBehaviour
             // simplify the variable to include user input delay
             double timeStamp = timeStamps[inputIndex];
             double marginOfError = SongManager.Instance.marginOfError;
-            double audioTime = SongManager.GetAudioSourceTime() - (SongManager.Instance.inputDelayInMilliseconds / 1000f);
+            double audioTime = SongManager.GetAudioSourceTime() - (SongManager.Instance.delay / 1000f);
         
             if (btnInput.IsPressed())
             {

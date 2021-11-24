@@ -14,7 +14,7 @@ public class SongManager : MonoBehaviour
     public Lane[] lanes;
     public float songDelayInSeconds; // delay second for playing song
     public double marginOfError;  // in seconds
-    public int inputDelayInMilliseconds;  // keyboard input delay time
+    public double delay;  // user input delay time
 
     public string fileLocation;
     public float noteTime;
@@ -206,7 +206,7 @@ public class SongManager : MonoBehaviour
     {
         foreach (var lane in lanes)
         {
-            lane.SetTimeStamps(notes);
+            lane.SetTimeStamps(notes, delay);
         }
 
     }

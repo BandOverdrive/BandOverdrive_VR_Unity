@@ -11651,7 +11651,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8285919950986519627, guid: 7f9bef6bf6207d24fbb384ac158661b3, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8285919950986519627, guid: 7f9bef6bf6207d24fbb384ac158661b3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17170,11 +17170,11 @@ MonoBehaviour:
   m_KickSurface: {fileID: 923115277}
   m_KickAnimator: {fileID: 1064831431}
   m_HihatControl: {fileID: 1258138685}
-  m_RedButton: {fileID: 716036633}
-  m_YellowButton: {fileID: 2067552844}
-  m_BlueButton: {fileID: 1560936927}
-  m_GreenButton: {fileID: 2114367791}
-  m_OrangeButton: {fileID: 1654545093}
+  m_RedButton: {fileID: 716036639}
+  m_YellowButton: {fileID: 2067552850}
+  m_BlueButton: {fileID: 1560936933}
+  m_GreenButton: {fileID: 2114367797}
+  m_OrangeButton: {fileID: 1654545099}
 --- !u!65 &459269517
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17875,11 +17875,11 @@ MonoBehaviour:
   m_KickSurface: {fileID: 923115277}
   m_KickAnimator: {fileID: 1064831431}
   m_HihatControl: {fileID: 1258138685}
-  m_RedButton: {fileID: 716036633}
-  m_YellowButton: {fileID: 2067552844}
-  m_BlueButton: {fileID: 1560936927}
-  m_GreenButton: {fileID: 2114367791}
-  m_OrangeButton: {fileID: 1654545093}
+  m_RedButton: {fileID: 716036639}
+  m_YellowButton: {fileID: 2067552850}
+  m_BlueButton: {fileID: 1560936933}
+  m_GreenButton: {fileID: 2114367797}
+  m_OrangeButton: {fileID: 1654545099}
 --- !u!65 &484808879
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25715,6 +25715,7 @@ GameObject:
   - component: {fileID: 716036637}
   - component: {fileID: 716036636}
   - component: {fileID: 716036635}
+  - component: {fileID: 716036639}
   m_Layer: 0
   m_Name: RedBtn
   m_TagString: Untagged
@@ -25734,7 +25735,7 @@ Transform:
   m_LocalScale: {x: 2.5, y: 0.1, z: 0.2}
   m_Children: []
   m_Father: {fileID: 1132924900}
-  m_RootOrder: 4
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: -25, y: 0, z: 0}
 --- !u!95 &716036635
 Animator:
@@ -25817,6 +25818,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716036633}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &716036639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716036633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3669833835a693c48b474a54663c8824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &717260463
 GameObject:
   m_ObjectHideFlags: 0
@@ -40671,16 +40684,16 @@ Transform:
   - {fileID: 2051353765}
   - {fileID: 1576559338}
   - {fileID: 1080619099}
-  - {fileID: 716036634}
-  - {fileID: 2067552845}
-  - {fileID: 1560936928}
-  - {fileID: 2114367792}
-  - {fileID: 1654545094}
   - {fileID: 318230672}
   - {fileID: 309123138}
   - {fileID: 1855971837}
   - {fileID: 393142553}
   - {fileID: 2113213586}
+  - {fileID: 1654545094}
+  - {fileID: 2114367792}
+  - {fileID: 1560936928}
+  - {fileID: 2067552845}
+  - {fileID: 716036634}
   m_Father: {fileID: 379652893}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -25, y: 0, z: 0}
@@ -54337,6 +54350,7 @@ GameObject:
   - component: {fileID: 1560936931}
   - component: {fileID: 1560936930}
   - component: {fileID: 1560936929}
+  - component: {fileID: 1560936933}
   m_Layer: 0
   m_Name: BlueBtn
   m_TagString: Untagged
@@ -54356,7 +54370,7 @@ Transform:
   m_LocalScale: {x: 2.5, y: 0.1, z: 0.2}
   m_Children: []
   m_Father: {fileID: 1132924900}
-  m_RootOrder: 6
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: -25, y: 0, z: 0}
 --- !u!95 &1560936929
 Animator:
@@ -54439,6 +54453,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560936927}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1560936933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560936927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3669833835a693c48b474a54663c8824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1561444058
 GameObject:
   m_ObjectHideFlags: 0
@@ -56698,6 +56724,7 @@ GameObject:
   - component: {fileID: 1654545097}
   - component: {fileID: 1654545096}
   - component: {fileID: 1654545095}
+  - component: {fileID: 1654545099}
   m_Layer: 0
   m_Name: OrangeBtn
   m_TagString: Untagged
@@ -56717,7 +56744,7 @@ Transform:
   m_LocalScale: {x: 10, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 1132924900}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: -25, y: 0, z: 0}
 --- !u!95 &1654545095
 Animator:
@@ -56800,6 +56827,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1654545093}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1654545099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654545093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3669833835a693c48b474a54663c8824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1654605578
 GameObject:
   m_ObjectHideFlags: 0
@@ -72685,6 +72724,7 @@ GameObject:
   - component: {fileID: 2067552848}
   - component: {fileID: 2067552847}
   - component: {fileID: 2067552846}
+  - component: {fileID: 2067552850}
   m_Layer: 0
   m_Name: YellowBtn
   m_TagString: Untagged
@@ -72704,7 +72744,7 @@ Transform:
   m_LocalScale: {x: 2.5, y: 0.1, z: 0.2}
   m_Children: []
   m_Father: {fileID: 1132924900}
-  m_RootOrder: 5
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: -25, y: 0, z: 0}
 --- !u!95 &2067552846
 Animator:
@@ -72787,6 +72827,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2067552844}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2067552850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067552844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3669833835a693c48b474a54663c8824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2071272485
 GameObject:
   m_ObjectHideFlags: 0
@@ -74511,7 +74563,7 @@ Transform:
   m_LocalScale: {x: 10, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 1132924900}
-  m_RootOrder: 13
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: -25, y: 0, z: 0}
 --- !u!95 &2113213587
 Animator:
@@ -74689,6 +74741,7 @@ GameObject:
   - component: {fileID: 2114367795}
   - component: {fileID: 2114367794}
   - component: {fileID: 2114367793}
+  - component: {fileID: 2114367797}
   m_Layer: 0
   m_Name: GreenBtn
   m_TagString: Untagged
@@ -74708,7 +74761,7 @@ Transform:
   m_LocalScale: {x: 2.5, y: 0.1, z: 0.2}
   m_Children: []
   m_Father: {fileID: 1132924900}
-  m_RootOrder: 7
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: -25, y: 0, z: 0}
 --- !u!95 &2114367793
 Animator:
@@ -74791,6 +74844,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2114367791}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2114367797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114367791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3669833835a693c48b474a54663c8824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2119440176
 PrefabInstance:
   m_ObjectHideFlags: 0
