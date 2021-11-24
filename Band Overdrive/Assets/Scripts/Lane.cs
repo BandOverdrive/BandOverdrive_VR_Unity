@@ -8,7 +8,8 @@ public class Lane : MonoBehaviour
 {
     public Melanchall.DryWetMidi.MusicTheory.NoteName noteRestriction;
     //public KeyCode input; // this is keyboard input
-    public GuitarButton btnInput; // this is vr button input
+    //public GuitarButton btnInput; // this is vr button input
+    public DrumButton btnInput;
     public GameObject notePrefab;
     List<Note> notes = new List<Note>();
     public List<double> timeStamps = new List<double>();  // array of exact time for each note should be tapped

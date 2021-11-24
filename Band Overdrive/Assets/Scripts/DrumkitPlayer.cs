@@ -15,11 +15,17 @@ public class DrumkitPlayer : MonoBehaviour
     public Animator m_KickAnimator;
     public HihatControl m_HihatControl;
 
-    public GameObject m_RedButton;
-    public GameObject m_YellowButton;
-    public GameObject m_BlueButton;
-    public GameObject m_GreenButton;
-    public GameObject m_OrangeButton;
+    //public GameObject m_RedButton;
+    //public GameObject m_YellowButton;
+    //public GameObject m_BlueButton;
+    //public GameObject m_GreenButton;
+    //public GameObject m_OrangeButton;
+
+    public DrumButton m_RedButton;
+    public DrumButton m_YellowButton;
+    public DrumButton m_BlueButton;
+    public DrumButton m_GreenButton;
+    public DrumButton m_OrangeButton;
 
     private AudioSource m_KickAudio;
 
@@ -42,7 +48,14 @@ public class DrumkitPlayer : MonoBehaviour
                 m_KickAnimator.Play("Drum_KickBeat");
                 // Generate KICK NOTE
                 m_OrangeButton.GetComponent<Animator>().Play("Hit");
+                // Set Button is Pressed
+                m_OrangeButton.setPressed(true);
             }
+            else
+            {
+                m_OrangeButton.setPressed(false);
+            }
+            
 
             // Hihat
             if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
@@ -80,46 +93,111 @@ public class DrumkitPlayer : MonoBehaviour
             case "S_SNARE":
                 // RED NOTE
                 m_RedButton.GetComponent<Animator>().Play("Hit");
+                m_RedButton.setPressed(true);
                 break;
             case "S_TOM1":
                 // YELLOW NOTE
                 m_YellowButton.GetComponent<Animator>().Play("Hit");
+                m_YellowButton.setPressed(true);
                 break;
             case "S_TOM2":
             case "S_LFLOOR":
                 // BLUE NOTE
                 m_BlueButton.GetComponent<Animator>().Play("Hit");
+                m_BlueButton.setPressed(true);
                 break;
             case "S_FLOOR1":
             case "S_FLOOR2":
                 // GREEN NOTE
                 m_GreenButton.GetComponent<Animator>().Play("Hit");
+                m_GreenButton.setPressed(true);
                 break;
             case "S_HIHAT":
                 if (m_HihatControl.IsOpened())
                 {
                     // BLUE ROUNDED NOTE
                     m_BlueButton.GetComponent<Animator>().Play("Hit");
+                    m_BlueButton.setPressed(true);
                 }
                 else
                 {
                     // YELLOW ROUNDED NOTE
                     m_YellowButton.GetComponent<Animator>().Play("Hit");
+                    m_YellowButton.setPressed(true);
                 }
                 break;
             case "S_CRASH1":
                 // YELLOW ROUNDED NOTE
                 m_YellowButton.GetComponent<Animator>().Play("Hit");
+                m_YellowButton.setPressed(true);
                 break;
             case "S_RIDE":
             case "S_LCRASH":
             case "S_CHINA":
                 // BLUE ROUNDED NOTE
                 m_BlueButton.GetComponent<Animator>().Play("Hit");
+                m_BlueButton.setPressed(true);
                 break;
             case "S_CRASH2":
                 // GREEN ROUNDED NOTE
                 m_GreenButton.GetComponent<Animator>().Play("Hit");
+                m_GreenButton.setPressed(true);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // Note set Pressed
+        string name = other.gameObject.name;
+        switch (name)
+        {
+            case "S_SNARE":
+                // RED NOTE
+                m_RedButton.setPressed(false);
+                break;
+            case "S_TOM1":
+                // YELLOW NOTE
+                m_YellowButton.setPressed(false);
+                break;
+            case "S_TOM2":
+            case "S_LFLOOR":
+                // BLUE NOTE
+                m_BlueButton.setPressed(false);
+                break;
+            case "S_FLOOR1":
+            case "S_FLOOR2":
+                // GREEN NOTE
+                m_GreenButton.setPressed(false);
+                break;
+            case "S_HIHAT":
+                if (m_HihatControl.IsOpened())
+                {
+                    // BLUE ROUNDED NOTE
+                    m_BlueButton.setPressed(false);
+                }
+                else
+                {
+                    // YELLOW ROUNDED NOTE
+                    m_YellowButton.setPressed(false);
+                }
+                break;
+            case "S_CRASH1":
+                // YELLOW ROUNDED NOTE
+                m_YellowButton.setPressed(false);
+                break;
+            case "S_RIDE":
+            case "S_LCRASH":
+            case "S_CHINA":
+                // BLUE ROUNDED NOTE
+                m_BlueButton.setPressed(false);
+                break;
+            case "S_CRASH2":
+                // GREEN ROUNDED NOTE
+                m_GreenButton.setPressed(false);
                 break;
 
             default:

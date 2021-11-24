@@ -18,8 +18,8 @@ public class SongManager : MonoBehaviour
 
     public string fileLocation;
     public float noteTime;
-    public float noteSpawnX;
-    public float noteTapX;
+    public float noteSpawnZ;  // attention: guitar is x!
+    public float noteTapZ;
 
     ICollection<Melanchall.DryWetMidi.Interaction.Note> drumNotes;
     ICollection<Melanchall.DryWetMidi.Interaction.Note> bassNotes;
@@ -46,11 +46,11 @@ public class SongManager : MonoBehaviour
 
 
 
-    public float noteDespawnX
+    public float noteDespawnZ
     {
         get
         {
-            return noteTapX - (noteSpawnX - noteTapX);
+            return noteTapZ - (noteSpawnZ - noteTapZ);
         }
     }
 
