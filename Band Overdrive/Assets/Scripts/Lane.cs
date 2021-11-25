@@ -22,14 +22,19 @@ public class Lane : MonoBehaviour
         
     }
 
-    public void SetTimeStamps(Melanchall.DryWetMidi.Interaction.Note[] array, double delay)
+    public void SetTimeStamps(SongManager.Instrument currInstrument, Melanchall.DryWetMidi.Interaction.Note[] array, double delay)
     {
         foreach (var note in array)
         {
             if (note.NoteName == noteRestriction)
             {
+                if (currInstrument == SongManager.Instrument.Keyboard)
+                {
+                    if (!gameObject.name.Contains(note.Octave.ToString()))
+                        continue;
+                }
                 var metricTimeSpan = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, SongManager.midiFile.GetTempoMap());
-                timeStamps.Add((double)metricTimeSpan.Minutes * 60f + metricTimeSpan.Seconds + (double)metricTimeSpan.Milliseconds / 1000f + delay); 
+                timeStamps.Add((double)metricTimeSpan.Minutes * 60f + metricTimeSpan.Seconds + (double)metricTimeSpan.Milliseconds / 1000f + delay);
             }
         }
     }

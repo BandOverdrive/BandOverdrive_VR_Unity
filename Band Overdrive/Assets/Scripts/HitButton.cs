@@ -15,4 +15,9 @@ public class HitButton : MonoBehaviour
     {
         return m_isPressed;
     }
+
+    public void setUnPressed()
+    {
+        m_isPressed = false;
+    }
 }

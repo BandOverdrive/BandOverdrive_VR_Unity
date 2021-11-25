@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyboardButton : MonoBehaviour
+public class KeyboardButton : HitButton
 {
     public OVRHand m_LeftHand;
     public OVRHand m_RightHand;
@@ -10,7 +10,8 @@ public class KeyboardButton : MonoBehaviour
     private int m_PressingCountL;
     private int m_PressingCountR;
     private int m_PressingCount;
-    private bool m_IsPressed;
+    private bool m_IsHitted;
+    private float m_HitEffectInSeconds = 0.5f;
 
     private GameObject m_keyMesh;
     private Vector3 m_ButtonPosition;
@@ -21,7 +22,7 @@ public class KeyboardButton : MonoBehaviour
         m_PressingCountL = 0;
         m_PressingCountR = 0;
         m_PressingCount = 0;
-        m_IsPressed = false;
+        m_IsHitted = false;
 
         m_keyMesh = gameObject.transform.GetChild(0).gameObject;
         m_ButtonPosition = m_keyMesh.transform.position;
@@ -38,11 +39,11 @@ public class KeyboardButton : MonoBehaviour
         m_PressingCount = m_PressingCountL + m_PressingCountR;
 
         if (m_PressingCount > 0)
-            m_IsPressed = true;
+            m_IsHitted = true;
         else
-            m_IsPressed = false;
+            m_IsHitted = false;
 
-        if (m_IsPressed)
+        if (m_IsHitted)
         {
             //m_keyMesh.GetComponent<Renderer>().material.color = Color.blue;
             m_keyMesh.transform.position = m_ButtonPosition + new Vector3(0.0f, -0.01f, 0.0f);
@@ -60,9 +61,9 @@ public class KeyboardButton : MonoBehaviour
         {
             if (m_PressingCount == 0)
             {
-                // Generate note
-                //string noteName = gameObject.name;
-                //Debug.Log(noteName);
+                // Hit the note (now using press as the signal)
+                setPressed(true);
+                Invoke(nameof(setUnPressed), m_HitEffectInSeconds);
             }
             if (IsLeftHand(other))
                 m_PressingCountL++;

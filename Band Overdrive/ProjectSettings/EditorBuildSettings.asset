@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Stage.unity
     guid: aa90e2735b7fd11448a535dbfd9f4b44
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/DevGuitar.unity
     guid: e9cf2ea905e034f4f99b54cb8c6d2242
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Scene_04single_drumPlay.unity
     guid: 16ea3de5f0a81f44a9f26729bae6cbca
   m_configObjects:

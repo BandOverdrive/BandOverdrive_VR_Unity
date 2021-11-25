@@ -26,12 +26,18 @@ public class SongManager : MonoBehaviour
     ICollection<Melanchall.DryWetMidi.Interaction.Note> guitarNotes;
     ICollection<Melanchall.DryWetMidi.Interaction.Note> vocalNotes;
 
+    ICollection<Melanchall.DryWetMidi.Interaction.Note> keyExpertNotes;
+    ICollection<Melanchall.DryWetMidi.Interaction.Note> keyHardNotes;
+    ICollection<Melanchall.DryWetMidi.Interaction.Note> keyMediumNotes;
+    ICollection<Melanchall.DryWetMidi.Interaction.Note> keyEasyNotes;
+
     public enum Instrument
     {
         Drum,
         Bass,
         Guitar,
-        Vocal
+        Vocal,
+        Keyboard
     }
     public Instrument currInstrument;
 
@@ -100,16 +106,6 @@ public class SongManager : MonoBehaviour
 
     public void GetDataFromMidi()
     {
-        //var notes = midiFile.GetNotes();
-        //var array = new Melanchall.DryWetMidi.Interaction.Note[notes.Count];
-        //notes.CopyTo(array, 0);
-
-        //// Load lanes
-        //foreach (var lane in lanes)
-        //{
-        //    lane.SetTimeStamps(array);
-        //}
-
         var chunks = midiFile.GetTrackChunks();
 
         //notes.CopyTo(array, 0);
@@ -135,6 +131,26 @@ public class SongManager : MonoBehaviour
             {
                 // Part Vocal
                 vocalNotes = chunk.GetNotes();
+            }
+            else if (index == 8)
+            {
+                // Part Real Key Expert
+                keyExpertNotes = chunk.GetNotes();
+            }
+            else if (index == 9)
+            {
+                // Part Real Key Hard
+                keyHardNotes = chunk.GetNotes();
+            }
+            else if (index == 10)
+            {
+                // Part Real Key Medium
+                keyMediumNotes = chunk.GetNotes();
+            }
+            else if (index == 11)
+            {
+                // Part Real Key Easy
+                keyEasyNotes = chunk.GetNotes();
             }
 
             index++;
@@ -162,6 +178,11 @@ public class SongManager : MonoBehaviour
             case Instrument.Vocal:
                 print("----- vocal -----");
                 levelNotes = getNotesByLevel(vocalNotes, currLevel);
+                setNotesToLanes(levelNotes);
+                break;
+            case Instrument.Keyboard:
+                print("----- keyboard -----");
+                levelNotes = getKeyNoteByLevel(currLevel);
                 setNotesToLanes(levelNotes);
                 break;
         }
@@ -202,11 +223,45 @@ public class SongManager : MonoBehaviour
         return levelNotes.ToArray();
     }
 
+    private Melanchall.DryWetMidi.Interaction.Note[] getKeyNoteByLevel(Level currLevel)
+    {
+
+        if (currLevel == Level.Expert)
+        {
+            Melanchall.DryWetMidi.Interaction.Note[] levelNotes = new Melanchall.DryWetMidi.Interaction.Note[keyExpertNotes.Count];
+            keyExpertNotes.CopyTo(levelNotes, 0);
+            return levelNotes;
+        }
+        else if (currLevel == Level.Hard)
+        {
+            Melanchall.DryWetMidi.Interaction.Note[] levelNotes = new Melanchall.DryWetMidi.Interaction.Note[keyHardNotes.Count];
+            keyHardNotes.CopyTo(levelNotes, 0);
+            return levelNotes;
+        }
+        else if (currLevel == Level.Medium)
+        {
+            Melanchall.DryWetMidi.Interaction.Note[] levelNotes = new Melanchall.DryWetMidi.Interaction.Note[keyMediumNotes.Count];
+            keyMediumNotes.CopyTo(levelNotes, 0);
+            return levelNotes;
+        }
+        else if (currLevel == Level.Easy)
+        {
+            Melanchall.DryWetMidi.Interaction.Note[] levelNotes = new Melanchall.DryWetMidi.Interaction.Note[keyEasyNotes.Count];
+            keyEasyNotes.CopyTo(levelNotes, 0);
+            return levelNotes;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
     private void setNotesToLanes(Melanchall.DryWetMidi.Interaction.Note[] notes)
     {
         foreach (var lane in lanes)
         {
-            lane.SetTimeStamps(notes, delay);
+            lane.SetTimeStamps(currInstrument, notes, delay);
         }
 
     }
