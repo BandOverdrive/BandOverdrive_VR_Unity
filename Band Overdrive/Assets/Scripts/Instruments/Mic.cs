@@ -32,9 +32,9 @@ public class Mic : MonoBehaviour
             {
                 // Generate pitch note
                 m_PitchIndicator.GetComponent<Renderer>().enabled = true;
-                float yPos = (midi - 36) / 48.0f * 10.0f;
+                float yPos = (midi - 36) / 48.0f - 0.5f;
                 Vector3 pos = m_PitchIndicator.transform.localPosition;
-                pos = new Vector3(pos.x, pos.y, yPos - 5.0f);
+                pos = new Vector3(pos.x, pos.y, yPos);
                 m_PitchIndicator.transform.localPosition = pos;
 
                 m_PitchIndicator.GetComponent<MicCursor>().SetPitch(midi);

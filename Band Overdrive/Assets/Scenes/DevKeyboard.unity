@@ -248,7 +248,7 @@ PrefabInstance:
       objectReference: {fileID: 877178086}
     - target: {fileID: 114392993255165844, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114392993255165844, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       propertyPath: _renderPhysicsCapsules
@@ -1851,7 +1851,7 @@ PrefabInstance:
       objectReference: {fileID: 1657421993}
     - target: {fileID: 114392993255165844, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114392993255165844, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       propertyPath: _renderPhysicsCapsules
@@ -2028,7 +2028,9 @@ MonoBehaviour:
   m_CurrentScore: 0
   m_CurrentHP: 80
   m_CurrentCombo: 0
-  m_CurrentLevel: 0
+  m_HitTotal: 0
+  m_Accuracy: 0
+  m_CurrentLevel: 1
   m_LaneC3: {fileID: 349663924}
   m_LaneCS3: {fileID: 1622829323}
   m_LaneD3: {fileID: 1456270895}

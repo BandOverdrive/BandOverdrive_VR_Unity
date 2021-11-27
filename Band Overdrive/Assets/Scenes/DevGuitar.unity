@@ -915,6 +915,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114392993255165844, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114428879332287356, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       propertyPath: HandType
       value: 1
@@ -1202,6 +1206,10 @@ PrefabInstance:
     - target: {fileID: 4453513310108136, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114392993255165844, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114567484643301796, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       propertyPath: m_Enabled
@@ -2008,7 +2016,7 @@ MonoBehaviour:
   m_SongAssetsPath: Yellow
   m_StartDelay: 0
   m_NotesDelay: 0.15
-  m_ErrorTime: 0.15
+  m_ErrorTime: 0.3
   m_NoteRollDistance: 0.35
   m_NoteRollTime: 4
   m_NoteTailScale: 0.01
@@ -2016,7 +2024,9 @@ MonoBehaviour:
   m_CurrentScore: 0
   m_CurrentHP: 80
   m_CurrentCombo: 0
-  m_CurrentLevel: 3
+  m_HitTotal: 0
+  m_Accuracy: 0
+  m_CurrentLevel: 0
   m_GreenLane: {fileID: 1562554948}
   m_RedLane: {fileID: 568627140}
   m_YellowLane: {fileID: 1730203607}

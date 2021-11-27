@@ -13,18 +13,30 @@ public class DrumTrack : Track
     public Lane m_GreenLane;
     public Lane m_OrangeLane;
 
-    private bool m_GreenCymbal;
-    private bool m_BlueCymbal;
-    private bool m_YellowCymbal;
+    private bool m_GreenTom;
+    private bool m_BlueTom;
+    private bool m_YellowTom;
+
+    private int m_NotesCount;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_GreenCymbal = false;
-        m_BlueCymbal = false;
-        m_YellowCymbal = false;
+        m_GreenTom = false;
+        m_BlueTom = false;
+        m_YellowTom = false;
+
+        m_NotesCount = 0;
 
         Invoke(nameof(LoadAndPlay), 0.1f);
+    }
+
+    protected override void TrackUpdate()
+    {
+        if (m_NotesCount != 0)
+            m_Accuracy = (float)m_HitTotal / m_NotesCount;
+        else
+            m_Accuracy = 0.0f;
     }
 
     private void LoadAndPlay()
@@ -101,26 +113,26 @@ public class DrumTrack : Track
                     }
 
                     if (note.NoteNumber == 112)
-                        m_GreenCymbal = true;
+                        m_GreenTom = true;
                     if (note.NoteNumber == 111)
-                        m_BlueCymbal = true;
+                        m_BlueTom = true;
                     if (note.NoteNumber == 110)
-                        m_YellowCymbal = true;
+                        m_YellowTom = true;
 
                     if (note.NoteNumber == greenNoteNum)
                     {
                         m_GreenLane.AddNote(CreateNote(note));
-                        m_GreenCymbal = false;
+                        m_GreenTom = false;
                     }
                     if (note.NoteNumber == blueNoteNum)
                     {
                         m_BlueLane.AddNote(CreateNote(note));
-                        m_BlueCymbal = false;
+                        m_BlueTom = false;
                     }
                     if (note.NoteNumber == yellowNoteNum)
                     {
                         m_YellowLane.AddNote(CreateNote(note));
-                        m_YellowCymbal = false;
+                        m_YellowTom = false;
                     }
                     if (note.NoteNumber == redNoteNum)
                         m_RedLane.AddNote(CreateNote(note));
@@ -152,7 +164,7 @@ public class DrumTrack : Track
         noteNew.isSolo = false;
         noteNew.isOverDrive = false;
         noteNew.isHopo = false;
-        noteNew.isCymbal = false;
+        noteNew.isTom = false;
         noteNew.noteNumber = 0;
         noteNew.lyric = "";
 
@@ -171,8 +183,10 @@ public class DrumTrack : Track
                 m_ODSection = false;
         }
 
-        if (m_GreenCymbal || m_BlueCymbal || m_YellowCymbal)
-            noteNew.isCymbal = true;
+        if (m_GreenTom || m_BlueTom || m_YellowTom)
+            noteNew.isTom = true;
+
+        m_NotesCount++;
 
         return noteNew;
     }

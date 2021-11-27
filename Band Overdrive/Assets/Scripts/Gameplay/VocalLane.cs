@@ -35,6 +35,9 @@ public class VocalLane : MonoBehaviour
 
     private VocalTrack m_Track;
 
+    private float m_ScoreTime;
+    private float m_FullScoreTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -101,8 +104,21 @@ public class VocalLane : MonoBehaviour
                 int maxCorrection = currNotePitch + correction;
                 int cursorPitch = m_Cursor.CurrentPitch();
 
+                float currTime = Time.time;
+                if (currTime - m_FullScoreTime > 0.1f)
+                {
+                    m_Track.m_FullScore++;
+                    m_FullScoreTime = currTime;
+                }
+
                 if (cursorPitch > minCorrection && cursorPitch < maxCorrection)
-                    m_Track.m_CurrentScore++;
+                {
+                    if (currTime - m_ScoreTime > 0.1f)
+                    {
+                        m_Track.m_CurrentScore++;
+                        m_ScoreTime = currTime;
+                    }
+                }
             }
             else if (timeElapsed >= noteEndTime)
                 m_InputIndex++;

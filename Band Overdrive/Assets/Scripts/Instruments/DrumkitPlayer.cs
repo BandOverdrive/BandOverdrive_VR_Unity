@@ -87,50 +87,50 @@ public class DrumkitPlayer : MonoBehaviour
             case "S_TOM1":
                 // YELLOW NOTE
                 m_YellowButton.GetComponent<Animator>().Play("Hit");
-                m_YellowButton.Hit();
+                m_YellowButton.TomHit();
                 break;
             case "S_TOM2":
             case "S_LFLOOR":
                 // BLUE NOTE
                 m_BlueButton.GetComponent<Animator>().Play("Hit");
-                m_BlueButton.Hit();
+                m_BlueButton.TomHit();
                 break;
             case "S_FLOOR1":
             case "S_FLOOR2":
                 // GREEN NOTE
                 m_GreenButton.GetComponent<Animator>().Play("Hit");
-                m_GreenButton.Hit();
+                m_GreenButton.TomHit();
                 break;
             case "S_HIHAT":
                 if (m_HihatControl.IsOpened())
                 {
                     // BLUE ROUNDED NOTE
                     m_BlueButton.GetComponent<Animator>().Play("Hit");
-                    m_BlueButton.CymbalHit();
+                    m_BlueButton.Hit();
                 }
                 else
                 {
                     // YELLOW ROUNDED NOTE
                     m_YellowButton.GetComponent<Animator>().Play("Hit");
-                    m_YellowButton.CymbalHit();
+                    m_YellowButton.Hit();
                 }
                 break;
             case "S_CRASH1":
                 // YELLOW ROUNDED NOTE
                 m_YellowButton.GetComponent<Animator>().Play("Hit");
-                m_YellowButton.CymbalHit();
+                m_YellowButton.Hit();
                 break;
             case "S_RIDE":
             case "S_LCRASH":
             case "S_CHINA":
                 // BLUE ROUNDED NOTE
                 m_BlueButton.GetComponent<Animator>().Play("Hit");
-                m_BlueButton.CymbalHit();
+                m_BlueButton.Hit();
                 break;
             case "S_CRASH2":
                 // GREEN ROUNDED NOTE
                 m_GreenButton.GetComponent<Animator>().Play("Hit");
-                m_GreenButton.CymbalHit();
+                m_GreenButton.Hit();
                 break;
 
             default:

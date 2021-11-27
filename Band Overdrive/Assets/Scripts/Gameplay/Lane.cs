@@ -16,6 +16,8 @@ public class Lane : MonoBehaviour
 
     private Track m_Track;
 
+    private float m_ScoreTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +48,7 @@ public class Lane : MonoBehaviour
                 noteObject.GetComponent<Note>().SetSolo(currNote.isSolo);
                 noteObject.GetComponent<Note>().SetOverDrive(currNote.isOverDrive);
                 noteObject.GetComponent<Note>().SetHopo(currNote.isHopo);
-                noteObject.GetComponent<Note>().SetCymbal(currNote.isCymbal);
+                noteObject.GetComponent<Note>().SetTom(currNote.isTom);
 
                 noteObject.GetComponent<Note>().Spawn(m_Track.GetTimeElapsed());
 
@@ -69,9 +71,9 @@ public class Lane : MonoBehaviour
                 {
                     if (Math.Abs(timeElapsed - hitTime) < errorTime)
                     {
-                        if (m_Notes[m_InputIndex].isCymbal)
+                        if (m_Notes[m_InputIndex].isTom)
                         {
-                            if (m_InputButton.IsCymbalHit())
+                            if (m_InputButton.IsTomHit())
                                 HitNote();
                         }
                         else if (m_Notes[m_InputIndex].isHopo)
@@ -80,11 +82,18 @@ public class Lane : MonoBehaviour
                                 HitNote();
                         }
                         else
-                            HitNote();
+                        {
+                            if (!m_InputButton.IsTomHit() && !m_InputButton.IsHopoHit())
+                                HitNote();
+                        }
                     }
                     else
                     {
                         // TOO EARLY
+                        // This is a bug to be fixed
+                        // The hit time is 0.1s and this branch will be
+                        // run in every frame during 0.1s
+                        // so the HP will be subtracted multiple times
                         m_Track.m_CurrentHP -= 1;
                     }
                 }
@@ -103,12 +112,18 @@ public class Lane : MonoBehaviour
                     // PRESSING
                     double pressingElapsedTime = Math.Abs(timeElapsed - hitTime);
                     double deltaTime = m_Notes[m_InputIndex].deltaTime;
-                    deltaTime -= pressingElapsedTime;
+                    deltaTime -= pressingElapsedTime + m_Track.m_NotesDelay;
+                    deltaTime -= m_Track.m_ErrorTime;
                     m_CurrNotes[m_InputIndex].UpdateTail(deltaTime);
                     if (deltaTime <= 0.0f)
                         DestroyNote();
 
-                    m_Track.m_CurrentScore += 1;
+                    float currTime = Time.time;
+                    if (currTime - m_ScoreTime > 0.1f)
+                    {
+                        m_Track.m_CurrentScore++;
+                        m_ScoreTime = currTime;
+                    }
                 }
                 else
                 {
@@ -138,6 +153,7 @@ public class Lane : MonoBehaviour
         m_Track.m_CurrentScore += 10;
         m_Track.m_CurrentHP += 3;
         m_Track.m_CurrentCombo++;
+        m_Track.m_HitTotal++;
     }
 
     public void AddNote(Track.Note note)

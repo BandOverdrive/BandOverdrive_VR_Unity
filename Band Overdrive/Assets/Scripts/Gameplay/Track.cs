@@ -21,6 +21,9 @@ public class Track : MonoBehaviour
     public int m_CurrentHP = 80;
     public int m_CurrentCombo = 0;
 
+    public int m_HitTotal = 0;
+    public float m_Accuracy = 0.0f;
+
     public enum Level
     {
         Easy,
@@ -42,7 +45,7 @@ public class Track : MonoBehaviour
         public bool isSolo;
         public bool isOverDrive;
         public bool isHopo;
-        public bool isCymbal;
+        public bool isTom;
 
         public int noteNumber;
         public string lyric;
@@ -71,6 +74,13 @@ public class Track : MonoBehaviour
             m_CurrentHP = 0;
             // GAMEOVER
         }
+
+        TrackUpdate();
+    }
+
+    protected virtual void TrackUpdate()
+    {
+
     }
 
     protected void LoadSong()

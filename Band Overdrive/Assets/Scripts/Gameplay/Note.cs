@@ -12,7 +12,7 @@ public class Note : MonoBehaviour
     private bool m_IsSolo;
     private bool m_IsOverDrive;
     private bool m_IsHopo;
-    private bool m_IsCymbal;
+    private bool m_IsTom;
 
     private double m_SpawnTime;
     private bool m_IsSpawned;
@@ -46,6 +46,8 @@ public class Note : MonoBehaviour
                 GetComponent<Renderer>().enabled = false;
             if (m_HasTail)
                 transform.GetChild(0).gameObject.SetActive(true);
+            else
+                transform.GetChild(0).gameObject.SetActive(false);
 
             Vector3 direction = new Vector3(0, 0, 1);
             Vector3 posBegin = direction * track.m_NoteRollDistance;
@@ -71,9 +73,15 @@ public class Note : MonoBehaviour
 
     public void UpdateTail(double deltaTime)
     {
+        if (deltaTime <= 0.0f)
+        {
+            m_HasTail = false;
+            return;
+        }
+
         Track track = transform.parent.parent.GetComponent<Track>();
         float speed = track.m_NoteRollDistance / track.m_NoteRollTime;
-        float length = speed * (float)deltaTime / 0.005f;
+        float length = speed * (float)deltaTime / track.m_NoteTailScale;
         transform.GetChild(0).localScale =
             new Vector3(0.2f, track.m_NoteTailWidth, length);
         m_IsPressing = true;
@@ -99,9 +107,9 @@ public class Note : MonoBehaviour
         m_IsHopo = hopo;
     }
 
-    public void SetCymbal(bool cymbal)
+    public void SetTom(bool tom)
     {
-        m_IsCymbal = cymbal;
+        m_IsTom = tom;
     }
 
     public void Spawn(double spawnTime)

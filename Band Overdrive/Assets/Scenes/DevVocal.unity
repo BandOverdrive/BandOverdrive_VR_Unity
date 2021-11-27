@@ -371,10 +371,13 @@ MonoBehaviour:
   m_CurrentScore: 0
   m_CurrentHP: 80
   m_CurrentCombo: 0
-  m_CurrentLevel: 3
+  m_HitTotal: 0
+  m_Accuracy: 0
+  m_CurrentLevel: 0
   m_VocalLane: {fileID: 608430428}
   m_VocalTrackType: 0
   m_CorrectionError: 3
+  m_FullScore: 0
 --- !u!1001 &149564962
 PrefabInstance:
   m_ObjectHideFlags: 0

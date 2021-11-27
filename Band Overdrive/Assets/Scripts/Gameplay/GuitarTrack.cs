@@ -13,6 +13,8 @@ public class GuitarTrack : Track
     public Lane m_BlueLane;
     public Lane m_OrangeLane;
 
+    private int m_NotesCount;
+
     public enum Instrument
     {
         Guitar,
@@ -23,7 +25,17 @@ public class GuitarTrack : Track
     // Start is called before the first frame update
     void Start()
     {
+        m_NotesCount = 0;
+
         Invoke(nameof(LoadAndPlay), 0.1f);
+    }
+
+    protected override void TrackUpdate()
+    {
+        if (m_NotesCount != 0)
+            m_Accuracy = (float)m_HitTotal / m_NotesCount;
+        else
+            m_Accuracy = 0.0f;
     }
 
     private void LoadAndPlay()
@@ -171,7 +183,7 @@ public class GuitarTrack : Track
         noteNew.isSolo = false;
         noteNew.isOverDrive = false;
         noteNew.isHopo = false;
-        noteNew.isCymbal = false;
+        noteNew.isTom = false;
         noteNew.noteNumber = 0;
         noteNew.lyric = "";
 
@@ -197,6 +209,8 @@ public class GuitarTrack : Track
             else
                 noteNew.isHopo = true;
         }
+
+        m_NotesCount++;
 
         return noteNew;
     }

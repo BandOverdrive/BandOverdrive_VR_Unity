@@ -21,12 +21,22 @@ public class VocalTrack : Track
 
     private List<string> m_Lyrics;
 
+    public int m_FullScore = 0;
+
     // Start is called before the first frame update
     void Start()
     {
         m_Lyrics = new List<string>();
 
         Invoke(nameof(LoadAndPlay), 0.1f);
+    }
+
+    override protected void TrackUpdate()
+    {
+        if (m_FullScore != 0.0f)
+            m_Accuracy = (float)m_CurrentScore / m_FullScore;
+        else
+            m_Accuracy = 0.0f;
     }
 
     private void LoadAndPlay()
@@ -135,7 +145,7 @@ public class VocalTrack : Track
         noteNew.isSolo = false;
         noteNew.isOverDrive = false;
         noteNew.isHopo = false;
-        noteNew.isCymbal = false;
+        noteNew.isTom = false;
 
         noteNew.noteNumber = note.NoteNumber;
         if (lyricIndex >= m_Lyrics.Count)
