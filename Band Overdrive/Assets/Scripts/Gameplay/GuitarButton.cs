@@ -8,8 +8,7 @@ public class GuitarButton : HitButton
     //private bool m_IsPressed;
     private int m_PressingCount;
 
-    // Start is called before the first frame update
-    void Start()
+    override protected void ButtonStart()
     {
         m_PressingCount = 0;
     }
@@ -31,7 +30,11 @@ public class GuitarButton : HitButton
     private void OnTriggerEnter(Collider other)
     {
         if (IsFingerTip(other))
+        {
             m_PressingCount++;
+            if (m_PressingCount == 1)
+                HopoHit();
+        }
     }
 
     private void OnTriggerExit(Collider other)

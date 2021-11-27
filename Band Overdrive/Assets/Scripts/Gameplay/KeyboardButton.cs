@@ -14,8 +14,7 @@ public class KeyboardButton : HitButton
     private GameObject m_keyMesh;
     private Vector3 m_ButtonPosition;
 
-    // Start is called before the first frame update
-    void Start()
+    override protected void ButtonStart()
     {
         m_PressingCountL = 0;
         m_PressingCountR = 0;

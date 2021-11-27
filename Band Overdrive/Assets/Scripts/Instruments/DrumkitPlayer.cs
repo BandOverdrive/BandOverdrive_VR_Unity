@@ -106,31 +106,31 @@ public class DrumkitPlayer : MonoBehaviour
                 {
                     // BLUE ROUNDED NOTE
                     m_BlueButton.GetComponent<Animator>().Play("Hit");
-                    m_BlueButton.Hit();
+                    m_BlueButton.CymbalHit();
                 }
                 else
                 {
                     // YELLOW ROUNDED NOTE
                     m_YellowButton.GetComponent<Animator>().Play("Hit");
-                    m_YellowButton.Hit();
+                    m_YellowButton.CymbalHit();
                 }
                 break;
             case "S_CRASH1":
                 // YELLOW ROUNDED NOTE
                 m_YellowButton.GetComponent<Animator>().Play("Hit");
-                m_YellowButton.Hit();
+                m_YellowButton.CymbalHit();
                 break;
             case "S_RIDE":
             case "S_LCRASH":
             case "S_CHINA":
                 // BLUE ROUNDED NOTE
                 m_BlueButton.GetComponent<Animator>().Play("Hit");
-                m_BlueButton.Hit();
+                m_BlueButton.CymbalHit();
                 break;
             case "S_CRASH2":
                 // GREEN ROUNDED NOTE
                 m_GreenButton.GetComponent<Animator>().Play("Hit");
-                m_GreenButton.Hit();
+                m_GreenButton.CymbalHit();
                 break;
 
             default:
