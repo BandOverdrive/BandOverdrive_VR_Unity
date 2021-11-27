@@ -7,31 +7,31 @@ using Melanchall.DryWetMidi.Interaction;
 
 public class KeyboardTrack : Track
 {
-    public LaneNew m_LaneC3;
-    public LaneNew m_LaneCS3;
-    public LaneNew m_LaneD3;
-    public LaneNew m_LaneDS3;
-    public LaneNew m_LaneE3;
-    public LaneNew m_LaneF3;
-    public LaneNew m_LaneFS3;
-    public LaneNew m_LaneG3;
-    public LaneNew m_LaneGS3;
-    public LaneNew m_LaneA3;
-    public LaneNew m_LaneAS3;
-    public LaneNew m_LaneB3;
-    public LaneNew m_LaneC4;
-    public LaneNew m_LaneCS4;
-    public LaneNew m_LaneD4;
-    public LaneNew m_LaneDS4;
-    public LaneNew m_LaneE4;
-    public LaneNew m_LaneF4;
-    public LaneNew m_LaneFS4;
-    public LaneNew m_LaneG4;
-    public LaneNew m_LaneGS4;
-    public LaneNew m_LaneA4;
-    public LaneNew m_LaneAS4;
-    public LaneNew m_LaneB4;
-    public LaneNew m_LaneC5;
+    public Lane m_LaneC3;
+    public Lane m_LaneCS3;
+    public Lane m_LaneD3;
+    public Lane m_LaneDS3;
+    public Lane m_LaneE3;
+    public Lane m_LaneF3;
+    public Lane m_LaneFS3;
+    public Lane m_LaneG3;
+    public Lane m_LaneGS3;
+    public Lane m_LaneA3;
+    public Lane m_LaneAS3;
+    public Lane m_LaneB3;
+    public Lane m_LaneC4;
+    public Lane m_LaneCS4;
+    public Lane m_LaneD4;
+    public Lane m_LaneDS4;
+    public Lane m_LaneE4;
+    public Lane m_LaneF4;
+    public Lane m_LaneFS4;
+    public Lane m_LaneG4;
+    public Lane m_LaneGS4;
+    public Lane m_LaneA4;
+    public Lane m_LaneAS4;
+    public Lane m_LaneB4;
+    public Lane m_LaneC5;
 
     // Start is called before the first frame update
     void Start()
@@ -48,19 +48,19 @@ public class KeyboardTrack : Track
         {
             case Level.Easy:
                 trackNameString = "Sequence/Track Name (PART REAL_KEYS_E)";
-                //m_NoteRollTime = A HIGER NUMBER;
+                m_NoteRollTime = 6;
                 break;
             case Level.Medium:
                 trackNameString = "Sequence/Track Name (PART REAL_KEYS_M)";
-                //m_NoteRollTime = A HIGH NUMBER;
+                m_NoteRollTime = 5;
                 break;
             case Level.Hard:
                 trackNameString = "Sequence/Track Name (PART REAL_KEYS_H)";
-                //m_NoteRollTime = A MODERATE NUMBER;
+                m_NoteRollTime = 4;
                 break;
             case Level.Expert:
                 trackNameString = "Sequence/Track Name (PART REAL_KEYS_X)";
-                //m_NoteRollTime = A SMALL NUMBER;
+                m_NoteRollTime = 3;
                 break;
         }
 
@@ -163,7 +163,11 @@ public class KeyboardTrack : Track
         noteNew.hitTime = hitTime;
         noteNew.deltaTime = 0.0f;
 
-        if (note.LengthAs(TimeSpanType.Musical, tempoMap).ToString() != "1/16")
+        string fraction = note.LengthAs(TimeSpanType.Musical, tempoMap).ToString();
+        int numerator = int.Parse(fraction.Split('/')[0]);
+        int denominator = int.Parse(fraction.Split('/')[1]);
+        float length = (float)numerator / denominator;
+        if (length > (float)1 / 16)
         {
             var deltaTimeSpan =
                 TimeConverter.ConvertTo<MetricTimeSpan>(note.Length, tempoMap);

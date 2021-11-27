@@ -9,6 +9,14 @@ public class VocalTrack : Track
 {
     public VocalLane m_VocalLane;
 
+    public enum VocalTrackType
+    {
+        Vocal,
+        Harmony1,
+        Harmony2,
+        Harmony3
+    }
+    public VocalTrackType m_VocalTrackType = VocalTrackType.Vocal;
     public int m_CorrectionError = 3;
 
     private List<string> m_Lyrics;
@@ -41,7 +49,22 @@ public class VocalTrack : Track
                 break;
         }
 
-        string trackNameString = "Sequence/Track Name (PART VOCALS)";
+        string trackNameString = "";
+        switch (m_VocalTrackType)
+        {
+            case VocalTrackType.Vocal:
+                trackNameString = "Sequence/Track Name (PART VOCALS)";
+                break;
+            case VocalTrackType.Harmony1:
+                trackNameString = "Sequence/Track Name (HARM1)";
+                break;
+            case VocalTrackType.Harmony2:
+                trackNameString = "Sequence/Track Name (HARM2)";
+                break;
+            case VocalTrackType.Harmony3:
+                trackNameString = "Sequence/Track Name (HARM3)";
+                break;
+        }
         var chunks = m_MidiFile.GetTrackChunks();
         foreach (var chunk in chunks)
         {

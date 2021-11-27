@@ -7,11 +7,11 @@ using Melanchall.DryWetMidi.Interaction;
 
 public class GuitarTrack : Track
 {
-    public LaneNew m_GreenLane;
-    public LaneNew m_RedLane;
-    public LaneNew m_YellowLane;
-    public LaneNew m_BlueLane;
-    public LaneNew m_OrangeLane;
+    public Lane m_GreenLane;
+    public Lane m_RedLane;
+    public Lane m_YellowLane;
+    public Lane m_BlueLane;
+    public Lane m_OrangeLane;
 
     public enum Instrument
     {
@@ -45,7 +45,7 @@ public class GuitarTrack : Track
             redNoteNum = 97;
             greenNoteNum = 96;
 
-            //m_NoteRollTime = A SMALL NUMBER;
+            m_NoteRollTime = 2;
         }
         else if (m_CurrentLevel == Level.Hard)
         {
@@ -56,7 +56,7 @@ public class GuitarTrack : Track
             redNoteNum = 85;
             greenNoteNum = 84;
 
-            //m_NoteRollTime = A MODERATE NUMBER;
+            m_NoteRollTime = 3;
         }
         else if (m_CurrentLevel == Level.Medium)
         {
@@ -67,7 +67,7 @@ public class GuitarTrack : Track
             redNoteNum = 73;
             greenNoteNum = 72;
 
-            //m_NoteRollTime = A HIGH NUMBER;
+            m_NoteRollTime = 4;
         }
         else
         {
@@ -78,7 +78,7 @@ public class GuitarTrack : Track
             redNoteNum = 61;
             greenNoteNum = 60;
 
-            //m_NoteRollTime = A HIGHER NUMBER;
+            m_NoteRollTime = 5;
         }
 
         string trackNameString = "";
@@ -153,7 +153,11 @@ public class GuitarTrack : Track
         noteNew.hitTime = hitTime;
         noteNew.deltaTime = 0.0f;
 
-        if (note.LengthAs(TimeSpanType.Musical, tempoMap).ToString() != "1/16")
+        string fraction = note.LengthAs(TimeSpanType.Musical, tempoMap).ToString();
+        int numerator = int.Parse(fraction.Split('/')[0]);
+        int denominator = int.Parse(fraction.Split('/')[1]);
+        float length = (float)numerator / denominator;
+        if (length > (float)1 / 16)
         {
             var deltaTimeSpan =
                 TimeConverter.ConvertTo<MetricTimeSpan>(note.Length, tempoMap);

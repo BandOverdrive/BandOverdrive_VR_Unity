@@ -3,101 +3,145 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Melanchall.DryWetMidi.Interaction;
-
 public class Lane : MonoBehaviour
 {
-    public Melanchall.DryWetMidi.MusicTheory.NoteName noteRestriction;
-    //public KeyCode input; // this is keyboard input
-    //public GuitarButton btnInput; // this is vr button input
-    public HitButton btnInput;
-    public GameObject notePrefab;
-    List<Note> notes = new List<Note>();
-    public List<double> timeStamps = new List<double>();  // array of exact time for each note should be tapped
+    public HitButton m_InputButton;
+    public GameObject m_NotePrefab;
 
-    int spawnIndex = 0;
-    int inputIndex = 0;
+    private List<Track.Note> m_Notes;
+    private List<Note> m_CurrNotes;
 
+    private int m_SpawnIndex;
+    private int m_InputIndex;
+
+    private Track m_Track;
+
+    // Start is called before the first frame update
     void Start()
     {
-        
-    }
+        m_Notes = new List<Track.Note>();
+        m_CurrNotes = new List<Note>();
 
-    public void SetTimeStamps(SongManager.Instrument currInstrument, Melanchall.DryWetMidi.Interaction.Note[] array, double delay)
-    {
-        foreach (var note in array)
-        {
-            if (note.NoteName == noteRestriction)
-            {
-                if (currInstrument == SongManager.Instrument.Keyboard)
-                {
-                    if (!gameObject.name.Contains(note.Octave.ToString()))
-                        continue;
-                }
-                var metricTimeSpan = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, SongManager.midiFile.GetTempoMap());
-                timeStamps.Add((double)metricTimeSpan.Minutes * 60f + metricTimeSpan.Seconds + (double)metricTimeSpan.Milliseconds / 1000f + delay);
-            }
-        }
+        m_SpawnIndex = 0;
+        m_InputIndex = 0;
+
+        m_Track = transform.parent.GetComponent<Track>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (spawnIndex < timeStamps.Count)
+        // SPAWN NOTES
+        if (m_SpawnIndex < m_Notes.Count)
         {
-            if (SongManager.GetAudioSourceTime() >= timeStamps[spawnIndex] - SongManager.Instance.noteTime)
+            Track.Note currNote = m_Notes[m_SpawnIndex];
+            double currNoteSpawnTime = currNote.hitTime - m_Track.m_NoteRollTime;
+            if (m_Track.GetTimeElapsed() >= currNoteSpawnTime)
             {
-                // the time for the note to be spawn
-                var note = Instantiate(notePrefab, transform);
-                notes.Add(note.GetComponent<Note>());
-                note.GetComponent<Note>().assignedTime = (float)timeStamps[spawnIndex];
-                spawnIndex++;
+                GameObject noteObject = Instantiate(m_NotePrefab, transform);
+                noteObject.AddComponent<Note>();
+                if (currNote.hasTail)
+                    noteObject.GetComponent<Note>().SetTail(currNote.deltaTime);
+
+                noteObject.GetComponent<Note>().SetSolo(currNote.isSolo);
+                noteObject.GetComponent<Note>().SetOverDrive(currNote.isOverDrive);
+                noteObject.GetComponent<Note>().SetHopo(currNote.isHopo);
+                noteObject.GetComponent<Note>().SetCymbal(currNote.isCymbal);
+
+                noteObject.GetComponent<Note>().Spawn(m_Track.GetTimeElapsed());
+
+                m_CurrNotes.Add(noteObject.GetComponent<Note>());
+                m_SpawnIndex++;
             }
         }
 
-        if (inputIndex < timeStamps.Count)
+        // USER INTERACTIONS
+        if (m_InputIndex < m_CurrNotes.Count)
         {
-            // simplify the variable to include user input delay
-            double timeStamp = timeStamps[inputIndex];
-            double marginOfError = SongManager.Instance.marginOfError;
-            double audioTime = SongManager.GetAudioSourceTime() - (SongManager.Instance.delay / 1000f);
-        
-            if (btnInput.IsHit())
+            double hitTime = m_Notes[m_InputIndex].hitTime;
+            double errorTime = m_Track.m_ErrorTime;
+            double timeElapsed = m_Track.GetTimeElapsed();
+            timeElapsed -= m_Track.m_NotesDelay / 1000.0f;
+
+            if (!m_CurrNotes[m_InputIndex].IsHit())
             {
-                // hit the button
-                if (Math.Abs(audioTime - timeStamp) < marginOfError)
+                if (m_InputButton.IsHit())
                 {
-                    // success to hit the note
-                    Hit();
-                    print($"Hit successfully on {inputIndex} note!");
-                    Destroy(notes[inputIndex].gameObject);
-                    inputIndex++;
+                    if (Math.Abs(timeElapsed - hitTime) < errorTime)
+                    {
+                        if (m_Notes[m_InputIndex].isCymbal)
+                        {
+                            if (m_InputButton.IsCymbalHit())
+                                HitNote();
+                        }
+                        else if (m_Notes[m_InputIndex].isHopo)
+                        {
+                            if (m_InputButton.IsHopoHit())
+                                HitNote();
+                        }
+                        else
+                            HitNote();
+                    }
+                    else
+                    {
+                        // TOO EARLY
+                        m_Track.m_CurrentHP -= 1;
+                    }
+                }
+                if (hitTime + errorTime <= timeElapsed)
+                {
+                    // TOO LATE
+                    m_Track.m_CurrentHP -= 1;
+                    m_Track.m_CurrentCombo = 0;
+                    m_InputIndex++;
+                }
+            }
+            else if (m_Notes[m_InputIndex].hasTail)
+            {
+                if (m_InputButton.IsPressed())
+                {
+                    // PRESSING
+                    double pressingElapsedTime = Math.Abs(timeElapsed - hitTime);
+                    double deltaTime = m_Notes[m_InputIndex].deltaTime;
+                    deltaTime -= pressingElapsedTime;
+                    m_CurrNotes[m_InputIndex].UpdateTail(deltaTime);
+                    if (deltaTime <= 0.0f)
+                        DestroyNote();
+
+                    m_Track.m_CurrentScore += 1;
                 }
                 else
                 {
-                    // fail to hit the note with
-                    print($"Hit inaccurate on {inputIndex} note");
-
+                    m_CurrNotes[m_InputIndex].StopPressing();
+                    m_InputIndex++;
                 }
             }
-            if (timeStamp + marginOfError <= audioTime)
-            {
-                // note hit the button 
-                Miss();
-                print($"Miss on {inputIndex} note");
-                inputIndex++;
-            }
-        
+            // There is no chance for any note to go into this branch
+            // Just wrote this in case
+            else
+                DestroyNote();
         }
     }
 
-    private void Hit()
+    private void DestroyNote()
     {
-        ScoreManager.Hit();
+        Destroy(m_CurrNotes[m_InputIndex].gameObject);
+        m_InputIndex++;
     }
 
-    private void Miss()
+    private void HitNote()
     {
-        ScoreManager.Miss();
+        m_CurrNotes[m_InputIndex].Hit();
+        if (!m_Notes[m_InputIndex].hasTail)
+            DestroyNote();
+
+        m_Track.m_CurrentScore += 10;
+        m_Track.m_CurrentHP += 3;
+        m_Track.m_CurrentCombo++;
+    }
+
+    public void AddNote(Track.Note note)
+    {
+        m_Notes.Add(note);
     }
 }

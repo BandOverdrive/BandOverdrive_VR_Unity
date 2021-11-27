@@ -359,7 +359,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 120783276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 237406682}
@@ -841,7 +841,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 349663923}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 992126190}
@@ -1101,7 +1101,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 458772431}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 871794337}
@@ -1197,7 +1197,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 466997953}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 968176420}
@@ -1293,7 +1293,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 487398303}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 2130716036}
@@ -1389,7 +1389,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 493035916}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 1958084348}
@@ -1502,11 +1502,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 568972798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 426338885562796690}
-  m_NotePrefab: {fileID: 8792842074218154674, guid: 558ea8d38fee5d4499eb9da652bebfbf, type: 3}
+  m_NotePrefab: {fileID: 5139959043483358094, guid: 237d25aed442f474ab6356a7b2704718, type: 3}
 --- !u!23 &568972800
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1598,11 +1598,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 596764373}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 6988626964933544002}
-  m_NotePrefab: {fileID: 8792842074218154674, guid: 558ea8d38fee5d4499eb9da652bebfbf, type: 3}
+  m_NotePrefab: {fileID: 5139959043483358094, guid: 237d25aed442f474ab6356a7b2704718, type: 3}
 --- !u!23 &596764375
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2023,10 +2023,12 @@ MonoBehaviour:
   m_ErrorTime: 0.15
   m_NoteRollDistance: 0.35
   m_NoteRollTime: 4
+  m_NoteTailScale: 0.01
+  m_NoteTailWidth: 0.5
   m_CurrentScore: 0
   m_CurrentHP: 80
   m_CurrentCombo: 0
-  m_CurrentLevel: 3
+  m_CurrentLevel: 0
   m_LaneC3: {fileID: 349663924}
   m_LaneCS3: {fileID: 1622829323}
   m_LaneD3: {fileID: 1456270895}
@@ -2080,7 +2082,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 776432317}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 1472906496}
@@ -3038,11 +3040,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1179443103}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 8426427418353518658}
-  m_NotePrefab: {fileID: 8792842074218154674, guid: 558ea8d38fee5d4499eb9da652bebfbf, type: 3}
+  m_NotePrefab: {fileID: 5139959043483358094, guid: 237d25aed442f474ab6356a7b2704718, type: 3}
 --- !u!23 &1179443105
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3226,11 +3228,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1335483188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 8231683014792524857}
-  m_NotePrefab: {fileID: 8792842074218154674, guid: 558ea8d38fee5d4499eb9da652bebfbf, type: 3}
+  m_NotePrefab: {fileID: 5139959043483358094, guid: 237d25aed442f474ab6356a7b2704718, type: 3}
 --- !u!23 &1335483190
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3322,7 +3324,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1343809667}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 1714204042}
@@ -3500,7 +3502,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1393345867}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 1134523499}
@@ -3759,7 +3761,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1444106190}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 1150599467}
@@ -3855,7 +3857,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1456270894}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 1770311344}
@@ -3951,11 +3953,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1464327354}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 7270306261653298756}
-  m_NotePrefab: {fileID: 8792842074218154674, guid: 558ea8d38fee5d4499eb9da652bebfbf, type: 3}
+  m_NotePrefab: {fileID: 5139959043483358094, guid: 237d25aed442f474ab6356a7b2704718, type: 3}
 --- !u!23 &1464327356
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4047,11 +4049,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1464888245}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 6056011589440344112}
-  m_NotePrefab: {fileID: 8792842074218154674, guid: 558ea8d38fee5d4499eb9da652bebfbf, type: 3}
+  m_NotePrefab: {fileID: 5139959043483358094, guid: 237d25aed442f474ab6356a7b2704718, type: 3}
 --- !u!23 &1464888247
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4203,7 +4205,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1517268816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 1632212}
@@ -4299,11 +4301,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1518969979}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 3612770780080086013}
-  m_NotePrefab: {fileID: 8792842074218154674, guid: 558ea8d38fee5d4499eb9da652bebfbf, type: 3}
+  m_NotePrefab: {fileID: 5139959043483358094, guid: 237d25aed442f474ab6356a7b2704718, type: 3}
 --- !u!23 &1518969981
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4476,11 +4478,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1583988194}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 4421716344147122844}
-  m_NotePrefab: {fileID: 8792842074218154674, guid: 558ea8d38fee5d4499eb9da652bebfbf, type: 3}
+  m_NotePrefab: {fileID: 5139959043483358094, guid: 237d25aed442f474ab6356a7b2704718, type: 3}
 --- !u!23 &1583988196
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4653,11 +4655,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1622829322}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 3018554487995110152}
-  m_NotePrefab: {fileID: 8792842074218154674, guid: 558ea8d38fee5d4499eb9da652bebfbf, type: 3}
+  m_NotePrefab: {fileID: 5139959043483358094, guid: 237d25aed442f474ab6356a7b2704718, type: 3}
 --- !u!23 &1622829324
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4982,7 +4984,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1733201699}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 2046241100}
@@ -5078,7 +5080,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1753400647}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 903854476}
@@ -5642,11 +5644,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1927510986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 5417559739941420416}
-  m_NotePrefab: {fileID: 8792842074218154674, guid: 558ea8d38fee5d4499eb9da652bebfbf, type: 3}
+  m_NotePrefab: {fileID: 5139959043483358094, guid: 237d25aed442f474ab6356a7b2704718, type: 3}
 --- !u!23 &1927510988
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6115,7 +6117,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2121755046}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f1d0b9bbf87e4439dfd87166f80119, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bf38930f4fc45c43b7c7d21b9033823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InputButton: {fileID: 1081774572}

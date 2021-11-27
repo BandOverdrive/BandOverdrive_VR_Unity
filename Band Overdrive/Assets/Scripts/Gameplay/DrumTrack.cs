@@ -7,11 +7,11 @@ using Melanchall.DryWetMidi.Interaction;
 
 public class DrumTrack : Track
 {
-    public LaneNew m_RedLane;
-    public LaneNew m_YellowLane;
-    public LaneNew m_BlueLane;
-    public LaneNew m_GreenLane;
-    public LaneNew m_OrangeLane;
+    public Lane m_RedLane;
+    public Lane m_YellowLane;
+    public Lane m_BlueLane;
+    public Lane m_GreenLane;
+    public Lane m_OrangeLane;
 
     private bool m_GreenCymbal;
     private bool m_BlueCymbal;
@@ -44,7 +44,7 @@ public class DrumTrack : Track
             redNoteNum = 97;
             orangeNoteNum = 96;
 
-            //m_NoteRollTime = A SMALL NUMBER;
+            m_NoteRollTime = 2;
         }
         else if (m_CurrentLevel == Level.Hard)
         {
@@ -54,7 +54,7 @@ public class DrumTrack : Track
             redNoteNum = 85;
             orangeNoteNum = 84;
 
-            //m_NoteRollTime = A MODERATE NUMBER;
+            m_NoteRollTime = 3;
         }
         else if (m_CurrentLevel == Level.Medium)
         {
@@ -64,7 +64,7 @@ public class DrumTrack : Track
             redNoteNum = 73;
             orangeNoteNum = 72;
 
-            //m_NoteRollTime = A HIGH NUMBER;
+            m_NoteRollTime = 4;
         }
         else
         {
@@ -74,7 +74,7 @@ public class DrumTrack : Track
             redNoteNum = 61;
             orangeNoteNum = 60;
 
-            //m_NoteRollTime = A HIGHER NUMBER;
+            m_NoteRollTime = 5;
         }
 
         string trackNameString = "Sequence/Track Name (PART DRUMS)";

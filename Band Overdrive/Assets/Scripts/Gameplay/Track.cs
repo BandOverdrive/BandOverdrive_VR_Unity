@@ -14,6 +14,9 @@ public class Track : MonoBehaviour
     public float m_NoteRollDistance = 0.35f;
     public float m_NoteRollTime = 4.0f;
 
+    public float m_NoteTailScale = 0.01f;
+    public float m_NoteTailWidth = 0.1f;
+
     public int m_CurrentScore = 0;
     public int m_CurrentHP = 80;
     public int m_CurrentCombo = 0;
