@@ -120,7 +120,7 @@ public class VocalLane : MonoBehaviour
                     }
                 }
             }
-            else if (timeElapsed >= noteEndTime)
+            if (timeElapsed >= noteEndTime)
                 m_InputIndex++;
         }
     }
