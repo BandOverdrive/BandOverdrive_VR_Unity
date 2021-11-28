@@ -6418,9 +6418,13 @@ MonoBehaviour:
   m_ErrorTime: 0.15
   m_NoteRollDistance: 0.35
   m_NoteRollTime: 4
+  m_NoteTailScale: 0.01
+  m_NoteTailWidth: 0.1
   m_CurrentScore: 0
   m_CurrentHP: 80
   m_CurrentCombo: 0
+  m_HitTotal: 0
+  m_Accuracy: 0
   m_CurrentLevel: 3
   m_RedLane: {fileID: 463745603}
   m_YellowLane: {fileID: 659963940}

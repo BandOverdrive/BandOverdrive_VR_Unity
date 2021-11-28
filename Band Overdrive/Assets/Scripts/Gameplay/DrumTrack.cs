@@ -66,7 +66,7 @@ public class DrumTrack : Track
             redNoteNum = 85;
             orangeNoteNum = 84;
 
-            m_NoteRollTime = 3;
+            m_NoteRollTime = 2.5f;
         }
         else if (m_CurrentLevel == Level.Medium)
         {
@@ -76,7 +76,7 @@ public class DrumTrack : Track
             redNoteNum = 73;
             orangeNoteNum = 72;
 
-            m_NoteRollTime = 4;
+            m_NoteRollTime = 3;
         }
         else
         {
@@ -86,7 +86,7 @@ public class DrumTrack : Track
             redNoteNum = 61;
             orangeNoteNum = 60;
 
-            m_NoteRollTime = 5;
+            m_NoteRollTime = 3.5f;
         }
 
         string trackNameString = "Sequence/Track Name (PART DRUMS)";
@@ -121,18 +121,33 @@ public class DrumTrack : Track
 
                     if (note.NoteNumber == greenNoteNum)
                     {
-                        m_GreenLane.AddNote(CreateNote(note));
-                        m_GreenTom = false;
+                        if (m_GreenTom)
+                        {
+                            m_GreenLane.AddNote(CreateNote(note, true));
+                            m_GreenTom = false;
+                        }
+                        else
+                            m_GreenLane.AddNote(CreateNote(note));
                     }
                     if (note.NoteNumber == blueNoteNum)
                     {
-                        m_BlueLane.AddNote(CreateNote(note));
-                        m_BlueTom = false;
+                        if (m_BlueTom)
+                        {
+                            m_BlueLane.AddNote(CreateNote(note, true));
+                            m_BlueTom = false;
+                        }
+                        else
+                            m_BlueLane.AddNote(CreateNote(note));
                     }
                     if (note.NoteNumber == yellowNoteNum)
                     {
-                        m_YellowLane.AddNote(CreateNote(note));
-                        m_YellowTom = false;
+                        if (m_YellowTom)
+                        {
+                            m_YellowLane.AddNote(CreateNote(note, true));
+                            m_YellowTom = false;
+                        }
+                        else
+                            m_YellowLane.AddNote(CreateNote(note));
                     }
                     if (note.NoteNumber == redNoteNum)
                         m_RedLane.AddNote(CreateNote(note));
@@ -147,7 +162,7 @@ public class DrumTrack : Track
         PlaySong();
     }
 
-    private Note CreateNote(Melanchall.DryWetMidi.Interaction.Note note)
+    private Note CreateNote(Melanchall.DryWetMidi.Interaction.Note note, bool isTom = false)
     {
         Note noteNew = new Note();
         TempoMap tempoMap = m_MidiFile.GetTempoMap();
@@ -183,7 +198,7 @@ public class DrumTrack : Track
                 m_ODSection = false;
         }
 
-        if (m_GreenTom || m_BlueTom || m_YellowTom)
+        if (isTom)
             noteNew.isTom = true;
 
         m_NotesCount++;
