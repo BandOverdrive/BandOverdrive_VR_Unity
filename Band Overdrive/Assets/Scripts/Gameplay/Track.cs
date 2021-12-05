@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Melanchall.DryWetMidi.Core;
+using UnityEngine.SceneManagement;
 
 public class Track : MonoBehaviour
 {
@@ -67,6 +68,15 @@ public class Track : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameObject.GetComponent<AudioSource>())
+        {
+            if (!IsSongPlaying())
+            {
+                SceneLoadManager.scorePasstoScene = m_CurrentScore.ToString();
+                SceneManager.LoadScene(5);
+            }
+        }
+
         if (m_CurrentHP > 100)
             m_CurrentHP = 100;
         if (m_CurrentHP <= 0)
@@ -76,6 +86,8 @@ public class Track : MonoBehaviour
         }
 
         TrackUpdate();
+
+
     }
 
     protected virtual void TrackUpdate()
@@ -111,5 +123,10 @@ public class Track : MonoBehaviour
         int timeSamples = gameObject.GetComponent<AudioSource>().timeSamples;
         int frequency = gameObject.GetComponent<AudioSource>().clip.frequency;
         return (double)timeSamples / frequency;
+    }
+
+    public bool IsSongPlaying()
+    {
+            return gameObject.GetComponent<AudioSource>().isPlaying;
     }
 }

@@ -9,14 +9,20 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene_ALL.unity
     guid: 65fec664cb9f70f4e8ae2ee0c379a919
   - enabled: 1
-    path: Assets/Scenes/DevGuitar.unity
-    guid: e9cf2ea905e034f4f99b54cb8c6d2242
+    path: Assets/Scenes/DevDrum_UI.unity
+    guid: dedf8219f7dde7b4da2b0e38ad52868f
   - enabled: 1
-    path: Assets/Scenes/DevDrum.unity
-    guid: d42c7dc13d150f74799365ae3063108b
+    path: Assets/Scenes/DevGuitar_UI.unity
+    guid: dc30f71624993a94fa5c06e0e98c52a7
   - enabled: 1
-    path: Assets/Scenes/Scene_04single_drumPlay.unity
-    guid: 16ea3de5f0a81f44a9f26729bae6cbca
+    path: Assets/Scenes/DevKeyboard_UI.unity
+    guid: 218fc974e80834b4cbcd80b4da60b3fd
+  - enabled: 1
+    path: Assets/Scenes/DevVocal_UI.unity
+    guid: 970edba3c1e107744ac97467c2eec39e
+  - enabled: 1
+    path: Assets/Scenes/Scene_06single_drumEND.unity
+    guid: a083b1b3561ae704c86791317de77510
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 2b18e78231f11ea40b5debc5cc646ce4, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: a855c736455c0174eb7d2843bf9c80b1, type: 2}

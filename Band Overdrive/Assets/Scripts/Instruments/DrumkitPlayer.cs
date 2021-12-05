@@ -51,6 +51,7 @@ public class DrumkitPlayer : MonoBehaviour
                 m_HihatControl.Close();
             if (OVRInput.GetUp(OVRInput.RawButton.RIndexTrigger))
                 m_HihatControl.Open();
+
         }
     }
 
