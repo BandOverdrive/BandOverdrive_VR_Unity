@@ -2379,7 +2379,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 388986698}
         m_TargetAssemblyTypeName: ButtonInteraction_home, Assembly-CSharp
-        m_MethodName: SetInstrucActive_multi
+        m_MethodName: LoadMultiplayerScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

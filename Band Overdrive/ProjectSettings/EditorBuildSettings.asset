@@ -23,6 +23,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scene_06single_drumEND.unity
     guid: a083b1b3561ae704c86791317de77510
+  - enabled: 1
+    path: Assets/Scenes/DevLoading.unity
+    guid: 73b9ea4a750de7040bbadbf99a30168a
+  - enabled: 1
+    path: Assets/Scenes/DevLobby.unity
+    guid: e54a5ba10a413574bafb4e3069c16168
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 2b18e78231f11ea40b5debc5cc646ce4, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: a855c736455c0174eb7d2843bf9c80b1, type: 2}

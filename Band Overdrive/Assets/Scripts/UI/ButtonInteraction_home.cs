@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ButtonInteraction_home : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class ButtonInteraction_home : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     //Set UI scene from HOME to single_Instrument
@@ -33,11 +34,10 @@ public class ButtonInteraction_home : MonoBehaviour
     }
 
     //Set UI scene from HOME to multi_Instrument
-    public void SetInstrucActive_multi()
+    public void LoadMultiplayerScene()
     {
-        canvas_instruMulti.SetActive(true);
-        canvas_home.SetActive(false);
-        camera_main.transform.position = camera_1.transform.position;
+        // Load the multiplayer loading scene
+        SceneManager.LoadScene(6);
     }
 
     //Set UI scene from HOME to setting
