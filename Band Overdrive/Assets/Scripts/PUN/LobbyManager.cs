@@ -10,6 +10,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     private List<string> m_RoomList = new List<string> { "Room A", "Room B", "Room C", "Room D" };
 
+    [SerializeField]
+    private byte maxPlayersPerRoom = 4;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +42,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         Photon.Realtime.RoomOptions roomOptions = new Photon.Realtime.RoomOptions();
         roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable();
         roomOptions.CustomRoomProperties.Add("room_name", selected);
+        roomOptions.MaxPlayers = maxPlayersPerRoom;
 
         // Join or create the room
         PhotonNetwork.JoinOrCreateRoom(selected, roomOptions, null);

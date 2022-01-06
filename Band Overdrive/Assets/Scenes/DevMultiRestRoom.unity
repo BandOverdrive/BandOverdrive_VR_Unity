@@ -11125,6 +11125,11 @@ MonoBehaviour:
   m_PlayerKeyboard: {fileID: 1521351816}
   m_PlayerVocal: {fileID: 1818654539}
   m_IsReady: 0
+  m_IsGameReady: 0
+  buttonDrum: {fileID: 1020402247}
+  buttonGuitar: {fileID: 1561944437}
+  buttonKeyboard: {fileID: 80467194}
+  buttonVocal: {fileID: 15730754}
 --- !u!114 &1714587347
 MonoBehaviour:
   m_ObjectHideFlags: 0

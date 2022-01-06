@@ -8,12 +8,18 @@ public class RestRoomManager : MonoBehaviourPun
 {
     public Text m_RoomName;
     public Text m_ReadyStartState;
-    public string m_RoleSelected;
+    public string m_RoleSelected = null;
     public Text m_PlayerDrum;
     public Text m_PlayerGuitar;
     public Text m_PlayerKeyboard;
     public Text m_PlayerVocal;
     public bool m_IsReady = false;
+    public bool m_IsGameReady = false;
+    // Role Button
+    public Button buttonDrum;
+    public Button buttonGuitar;
+    public Button buttonKeyboard;
+    public Button buttonVocal;
 
 
     // Start is called before the first frame update
@@ -21,79 +27,89 @@ public class RestRoomManager : MonoBehaviourPun
     {
         // Load room custom properties
         m_RoomName.text = PhotonNetwork.CurrentRoom.CustomProperties["room_name"].ToString();
-        // Add room custom properties;
-        //PhotonNetwork.CurrentRoom.CustomProperties.Add("role_drum", false);
-        //PhotonNetwork.CurrentRoom.CustomProperties.Add("role_guitar", false);
-        //PhotonNetwork.CurrentRoom.CustomProperties.Add("role_keyboard", false);
-        //PhotonNetwork.CurrentRoom.CustomProperties.Add("role_vocal", false);
 
-        //m_ReadyStartState.text = PhotonNetwork.CurrentRoom.PlayerCount == 1 ? "Start" : "Ready";
+        // Set up current player state
+        string _playerName = PlayerPrefs.GetString(StateNameController.playerNamePrefKey);
+        if (!string.IsNullOrEmpty(_playerName))
+        {
+            // Set NickName
+            PhotonNetwork.LocalPlayer.NickName = PlayerPrefs.GetString(StateNameController.playerNamePrefKey);
+            // Set custom properties
+            ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
+            hashtable.Add(StateNameController.customPropIsReady, m_IsReady);
+            hashtable.Add(StateNameController.customPropSelectedRole, m_RoleSelected);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
+        }
+        else
+            Debug.LogError("Player name is null or empty!");
+
+        // Set up the initialize state for the room
         m_ReadyStartState.text = "Ready";
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Update the current ready state for all players
-        //m_PlayerDrum.text = (bool)PhotonNetwork.CurrentRoom.CustomProperties["role_drum"] ? "Ready" : "Waiting..";
-        //m_PlayerGuitar.text = (bool)PhotonNetwork.CurrentRoom.CustomProperties["role_guitar"] ? "Ready" : "Waiting..";
-        //m_PlayerKeyboard.text = (bool)PhotonNetwork.CurrentRoom.CustomProperties["role_keyboard"] ? "Ready" : "Waiting..";
-        //m_PlayerVocal.text = (bool)PhotonNetwork.CurrentRoom.CustomProperties["role_vocal"] ? "Ready" : "Waiting..";
-
-
-        // If all 4 player is ready, then countdown to start the game for each
+        // Update the current interactable for each role button
+        if (PhotonNetwork.CountOfPlayersInRooms > 0)
+        {
+            m_IsGameReady = true;
+            foreach (var player in PhotonNetwork.PlayerList)
+            {
+                bool _currReady = (bool)player.CustomProperties[StateNameController.customPropIsReady];
+                string _currSelectedRole = (string)player.CustomProperties[StateNameController.customPropSelectedRole];
+                if (!_currReady)
+                {
+                    m_IsGameReady = false;
+                    break;
+                }
+            }
+            // If all 4 player is ready, then countdown to start the game for each
+            if (m_IsGameReady)
+            {
+                // Enter game after 10 seconds
+                print("------------- Enter game after 10s --------------");
+            }
+        }
     }
 
     public void ReadyOrStartClick()
     {
-        if (m_ReadyStartState.text == "Ready")
+        //print(" ------ + " + m_RoleSelected + " +--------");
+        if (m_IsReady == false)
         {
-            //PhotonNetwork.LocalPlayer.CustomProperties.Add("player_role", m_RoleSelected);
-            //PhotonNetwork.CurrentRoom.CustomProperties.Add("role_drum", true);
-            print(photonView);
-            photonView.RPC("ChangeRoleSelected", RpcTarget.All, m_RoleSelected);
-            //switch (m_RoleSelected)
-            //{
-            //    case "Drum":
-                    
-            //        break;
-            //    case "Guitar":
-                    
-            //        break;
-            //    case "Keyboard":
-                    
-            //        break;
-            //    case "Vocal":
-                    
-            //        break;
-            //    default: break;
-            //}
-
-            m_IsReady = true;
-            m_ReadyStartState.text = "Cancel";
+            if (m_RoleSelected.Length > 0)
+            {
+                m_IsReady = true;
+                m_ReadyStartState.text = "Cancel";
+            }
+            // Add tips for unselected ready
         }
         else
         {
-            //switch (m_RoleSelected)
-            //{
-            //    case "Drum":
-            //        m_PlayerDrum.text = "Waiting...";
-            //        break;
-            //    case "Guitar":
-            //        m_PlayerGuitar.text = "Waiting...";
-            //        break;
-            //    case "Keyboard":
-            //        m_PlayerKeyboard.text = "Waiting...";
-            //        break;
-            //    case "Vocal":
-            //        m_PlayerVocal.text = "Waiting...";
-            //        break;
-            //    default: break;
-            //}
-
-            m_IsReady =false;
-            m_ReadyStartState.text = "Ready";
+            if (m_RoleSelected.Length > 0)
+            {
+                m_IsReady = false;
+                m_ReadyStartState.text = "Ready";
+            }
         }
+
+        // Update the currentPlayer status and currentRoom setting
+        var hashtable = PhotonNetwork.LocalPlayer.CustomProperties;
+        hashtable[StateNameController.customPropIsReady] = m_IsReady;
+        hashtable[StateNameController.customPropSelectedRole] = m_IsReady ? m_RoleSelected : null;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
+
+        // RPC update
+        // !!To test the multiplayer in one client, set the photonView or set the photonView.IsMine
+        if (photonView)
+        {
+            photonView.RPC("ChangeRoleSelected", RpcTarget.All, m_RoleSelected, m_IsReady);
+
+            bool _isEnable = !m_IsReady;
+            photonView.RPC("SetButtonInteractable", RpcTarget.All, m_RoleSelected, _isEnable);
+        }
+
     }
 
     public void onDrumSelected()
@@ -118,25 +134,47 @@ public class RestRoomManager : MonoBehaviourPun
     }
 
     [PunRPC]
-    void ChangeRoleSelected(string roleSelected)
+    void ChangeRoleSelected(string roleSelected, bool isReady)
     {
         switch (roleSelected)
         {
             case "Drum":
                 //PhotonNetwork.CurrentRoom.CustomProperties["role_drum"] = true;
-                m_PlayerDrum.text = "Ready";
+                m_PlayerDrum.text = isReady ? (PhotonNetwork.NickName + " Ready") : "Waiting..";
                 break;
             case "Guitar":
-                m_PlayerGuitar.text = "Ready";
+                m_PlayerGuitar.text = isReady ? (PhotonNetwork.NickName + " Ready") : "Waiting..";
                 break;
             case "Keyboard":
-                m_PlayerKeyboard.text = "Ready";
+                m_PlayerKeyboard.text = isReady ? (PhotonNetwork.NickName + " Ready") : "Waiting..";
                 break;
             case "Vocal":
-                m_PlayerVocal.text = "Ready";
+                m_PlayerVocal.text = isReady ? (PhotonNetwork.NickName + " Ready") : "Waiting..";
                 break;
             default: break;
         }
 
     }
+
+    [PunRPC]
+    void SetButtonInteractable(string roleSelected, bool isEnable)
+    {
+        switch (roleSelected)
+        {
+            case "Drum":
+                buttonDrum.interactable = isEnable;
+                break;
+            case "Guitar":
+                buttonGuitar.interactable = isEnable;
+                break;
+            case "Keyboard":
+                buttonKeyboard.interactable = isEnable;
+                break;
+            case "Vocal":
+                buttonVocal.interactable = isEnable;
+                break;
+            default: break;
+        }
+    }
+
 }
