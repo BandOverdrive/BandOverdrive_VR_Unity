@@ -51,7 +51,7 @@ public class RestRoomManager : MonoBehaviourPun
     void Update()
     {
         // Update the current interactable for each role button
-        if (PhotonNetwork.CountOfPlayersInRooms > 0)
+        if (PhotonNetwork.CurrentRoom.PlayerCount > 0)
         {
             m_IsGameReady = true;
             foreach (var player in PhotonNetwork.PlayerList)
@@ -65,7 +65,7 @@ public class RestRoomManager : MonoBehaviourPun
                 }
             }
             // If all 4 player is ready, then countdown to start the game for each
-            if (m_IsGameReady)
+            if (m_IsGameReady && PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
             {
                 // Enter game after 10 seconds
                 print("------------- Enter game after 10s --------------");
