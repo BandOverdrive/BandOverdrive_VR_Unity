@@ -117,40 +117,71 @@ public class RestRoomManager : MonoBehaviourPunCallbacks
     public void StartGameScene()
     {
         // Should be four in the future
-        if (PhotonNetwork.PlayerList.Length > 0)
+        if (photonView.IsMine)
         {
-            foreach (var player in PhotonNetwork.PlayerList)
+            var player = PhotonNetwork.LocalPlayer;
+            if (player.CustomProperties.ContainsKey(StateNameController.customPropSelectedRole))
             {
-                if (player.CustomProperties.ContainsKey(StateNameController.customPropSelectedRole))
+                string _selectedRole = (string)player.CustomProperties[StateNameController.customPropSelectedRole];
+                if (!string.IsNullOrEmpty(_selectedRole))
                 {
-
-                    string _selectedRole = (string)player.CustomProperties[StateNameController.customPropSelectedRole];
-                    if (!string.IsNullOrEmpty(_selectedRole))
+                    switch (_selectedRole)
                     {
-                        switch (_selectedRole)
-                        {
-                            case "Drum":
-                                PhotonNetwork.LoadLevel(1);
-                                break;
-                            case "Guitar":
-                                PhotonNetwork.LoadLevel(2);
-                                break;
-                            case "Keyboard":
-                                PhotonNetwork.LoadLevel(3);
-                                break;
-                            case "Vocal":
-                                PhotonNetwork.LoadLevel(4);
-                                break;
-                            default: break;
-                        }
+                        case "Drum":
+                            PhotonNetwork.LoadLevel(1);
+                            break;
+                        case "Guitar":
+                            PhotonNetwork.LoadLevel(2);
+                            break;
+                        case "Keyboard":
+                            PhotonNetwork.LoadLevel(3);
+                            break;
+                        case "Vocal":
+                            PhotonNetwork.LoadLevel(4);
+                            break;
+                        default: break;
                     }
-                    else
-                        Debug.LogError("player role should be selected!");
                 }
                 else
-                    Debug.LogError("properties should contain selected_role!");
+                    Debug.LogError("player role should be selected!");
             }
+            else
+                Debug.LogError("properties should contain selected_role!");
         }
+        //if (PhotonNetwork.PlayerList.Length > 0)
+        //{
+        //    foreach (var player in PhotonNetwork.PlayerList)
+        //    {
+        //        if (player.CustomProperties.ContainsKey(StateNameController.customPropSelectedRole))
+        //        {
+
+        //            string _selectedRole = (string)player.CustomProperties[StateNameController.customPropSelectedRole];
+        //            if (!string.IsNullOrEmpty(_selectedRole))
+        //            {
+        //                switch (_selectedRole)
+        //                {
+        //                    case "Drum":
+        //                        PhotonNetwork.LoadLevel(1);
+        //                        break;
+        //                    case "Guitar":
+        //                        PhotonNetwork.LoadLevel(2);
+        //                        break;
+        //                    case "Keyboard":
+        //                        PhotonNetwork.LoadLevel(3);
+        //                        break;
+        //                    case "Vocal":
+        //                        PhotonNetwork.LoadLevel(4);
+        //                        break;
+        //                    default: break;
+        //                }
+        //            }
+        //            else
+        //                Debug.LogError("player role should be selected!");
+        //        }
+        //        else
+        //            Debug.LogError("properties should contain selected_role!");
+        //    }
+        //}
     }
 
     public void ReadyOrStartClick()
