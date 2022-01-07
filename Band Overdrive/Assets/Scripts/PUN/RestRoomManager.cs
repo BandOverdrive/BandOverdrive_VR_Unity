@@ -182,9 +182,11 @@ public class RestRoomManager : MonoBehaviourPunCallbacks
 
         // RPC update
         // !!To test the multiplayer in one client, set the photonView or set the photonView.IsMine
-        if (photonView.IsMine)
+        if (photonView)
         {
             string fromPlayerName = PhotonNetwork.LocalPlayer.NickName;
+            //print("---------------- " + fromPlayerName);
+            //print("================ " + PlayerPrefs.GetString(StateNameController.playerNamePrefKey));
             photonView.RPC("ChangeRoleSelected", RpcTarget.AllBuffered, fromPlayerName, m_RoleSelected, m_IsReady);
 
             bool _isEnable = !m_IsReady;
