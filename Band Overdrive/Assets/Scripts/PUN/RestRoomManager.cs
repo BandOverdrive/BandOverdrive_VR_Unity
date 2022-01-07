@@ -76,8 +76,8 @@ public class RestRoomManager : MonoBehaviourPunCallbacks
             {
                 // Set Master Client to be the Song Selector
                 print("------------- Enter game after 10s --------------");
-                print("-- " + PhotonNetwork.LocalPlayer.IsMasterClient);
-                if (PhotonNetwork.CurrentRoom.MasterClientId != -1 && PhotonNetwork.LocalPlayer.IsMasterClient)
+                print("-- " + PhotonNetwork.IsMasterClient);
+                if (PhotonNetwork.CurrentRoom.MasterClientId != -1 && PhotonNetwork.IsMasterClient)
                 {
                     string _currSelectedRole = (string)PhotonNetwork.LocalPlayer.CustomProperties[StateNameController.customPropSelectedRole];
                     
@@ -116,33 +116,41 @@ public class RestRoomManager : MonoBehaviourPunCallbacks
 
     public void StartGameScene()
     {
-        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey(StateNameController.customPropSelectedRole))
+        // Should be four in the future
+        if (PhotonNetwork.PlayerList.Length > 0)
         {
-            string _selectedRole = (string)PhotonNetwork.LocalPlayer.CustomProperties[StateNameController.customPropSelectedRole];
-            if (!string.IsNullOrEmpty(_selectedRole))
+            foreach (var player in PhotonNetwork.PlayerList)
             {
-                switch (_selectedRole)
+                if (player.CustomProperties.ContainsKey(StateNameController.customPropSelectedRole))
                 {
-                    case "Drum":
-                        PhotonNetwork.LoadLevel(1);
-                        break;
-                    case "Guitar":
-                        PhotonNetwork.LoadLevel(2);
-                        break;
-                    case "Keyboard":
-                        PhotonNetwork.LoadLevel(3);
-                        break;
-                    case "Vocal":
-                        PhotonNetwork.LoadLevel(4);
-                        break;
-                    default: break;
+
+                    string _selectedRole = (string)player.CustomProperties[StateNameController.customPropSelectedRole];
+                    if (!string.IsNullOrEmpty(_selectedRole))
+                    {
+                        switch (_selectedRole)
+                        {
+                            case "Drum":
+                                PhotonNetwork.LoadLevel(1);
+                                break;
+                            case "Guitar":
+                                PhotonNetwork.LoadLevel(2);
+                                break;
+                            case "Keyboard":
+                                PhotonNetwork.LoadLevel(3);
+                                break;
+                            case "Vocal":
+                                PhotonNetwork.LoadLevel(4);
+                                break;
+                            default: break;
+                        }
+                    }
+                    else
+                        Debug.LogError("player role should be selected!");
                 }
+                else
+                    Debug.LogError("properties should contain selected_role!");
             }
-            else
-                Debug.LogError("player role should be selected!");
         }
-        else
-            Debug.LogError("properties should contain selected_role!");
     }
 
     public void ReadyOrStartClick()
@@ -228,16 +236,16 @@ public class RestRoomManager : MonoBehaviourPunCallbacks
         {
             case "Drum":
                 //PhotonNetwork.CurrentRoom.CustomProperties["role_drum"] = true;
-                m_PlayerDrum.text = isReady ? (PhotonNetwork.NickName + " Ready") : "Waiting..";
+                m_PlayerDrum.text = isReady ? (PhotonNetwork.LocalPlayer.NickName + " Ready") : "Waiting..";
                 break;
             case "Guitar":
-                m_PlayerGuitar.text = isReady ? (PhotonNetwork.NickName + " Ready") : "Waiting..";
+                m_PlayerGuitar.text = isReady ? (PhotonNetwork.LocalPlayer.NickName + " Ready") : "Waiting..";
                 break;
             case "Keyboard":
-                m_PlayerKeyboard.text = isReady ? (PhotonNetwork.NickName + " Ready") : "Waiting..";
+                m_PlayerKeyboard.text = isReady ? (PhotonNetwork.LocalPlayer.NickName + " Ready") : "Waiting..";
                 break;
             case "Vocal":
-                m_PlayerVocal.text = isReady ? (PhotonNetwork.NickName + " Ready") : "Waiting..";
+                m_PlayerVocal.text = isReady ? (PhotonNetwork.LocalPlayer.NickName + " Ready") : "Waiting..";
                 break;
             default: break;
         }

@@ -36,8 +36,8 @@ public class StateNameController : MonoBehaviour
 
     public static List<PlayerNameKeyValue> playerNameList = new List<PlayerNameKeyValue>
     {
-        new PlayerNameKeyValue("Tom", false),
         new PlayerNameKeyValue("Penny", false),
+        new PlayerNameKeyValue("Tom", false),
         new PlayerNameKeyValue("John", false),
         new PlayerNameKeyValue("Homie", false),
         new PlayerNameKeyValue("Kate", false),

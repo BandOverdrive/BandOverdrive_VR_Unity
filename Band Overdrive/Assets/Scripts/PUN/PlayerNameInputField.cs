@@ -20,6 +20,7 @@ public class PlayerNameInputField : MonoBehaviour
         {
             if (PlayerPrefs.HasKey(StateNameController.playerNamePrefKey))
             {
+                //PlayerPrefs.SetString(StateNameController.playerNamePrefKey, "Penny");
                 defaultName = PlayerPrefs.GetString(StateNameController.playerNamePrefKey);
                 _input.text = defaultName;
             }
