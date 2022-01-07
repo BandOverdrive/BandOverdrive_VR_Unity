@@ -28,6 +28,7 @@ public class ButtonInteraction_home : MonoBehaviour
     //Set UI scene from HOME to single_Instrument
     public void SetInstrucActive_single()
     {
+        StateNameController.gamePlayMode = StateNameController.SINGLE_MODE;
         canvas_instruSingle.SetActive(true);
         canvas_home.SetActive(false);
         camera_main.transform.position = camera_1.transform.position;
@@ -36,6 +37,7 @@ public class ButtonInteraction_home : MonoBehaviour
     //Set UI scene from HOME to multi_Instrument
     public void LoadMultiplayerScene()
     {
+        StateNameController.gamePlayMode = StateNameController.MULTIPLE_MODE;
         // Load the multiplayer loading scene
         SceneManager.LoadScene(6);
     }

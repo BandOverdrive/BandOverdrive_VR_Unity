@@ -5,17 +5,27 @@ using UnityEngine;
 public class StateNameController : MonoBehaviour
 {
     public static string seletedRoomName;
+    public static int gamePlayMode;
 
+    // Properties for each player
     public const string playerNamePrefKey = "player_name";
     public const string customPropIsReady = "is_ready";
     public const string customPropSelectedRole = "selected_role";
+
+    // Properties for each room
+    public const string roomCustomPropRoom = "room_name";
+    public const string roomCustomPropIsStart = "is_start";
+    public const string roomCustomPropSong = "selected_song";
+    public const string roomCustomPropLevel = "selected_level";
+    public const int SINGLE_MODE = 0;
+    public const int MULTIPLE_MODE = 1;
 
     public struct PlayerNameKeyValue
     {
         public string name;
         public bool isUsed;
 
-        public PlayerNameKeyValue(string name, bool isUsed)
+        public PlayerNameKeyValue(string name, bool isUsed) 
         {
             this.name = name;
             this.isUsed = isUsed;

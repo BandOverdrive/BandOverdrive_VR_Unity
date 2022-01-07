@@ -41,7 +41,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         // Set up room custom properties
         Photon.Realtime.RoomOptions roomOptions = new Photon.Realtime.RoomOptions();
         roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable();
-        roomOptions.CustomRoomProperties.Add("room_name", selected);
+        roomOptions.CustomRoomProperties.Add(StateNameController.roomCustomPropRoom, selected);
+        roomOptions.CustomRoomProperties.Add(StateNameController.roomCustomPropSong, null);
+        roomOptions.CustomRoomProperties.Add(StateNameController.roomCustomPropLevel, null);
+        roomOptions.CustomRoomProperties.Add(StateNameController.roomCustomPropIsStart, false);
         roomOptions.MaxPlayers = maxPlayersPerRoom;
 
         // Join or create the room

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class SceneLoadManager : MonoBehaviour
 {
@@ -26,6 +27,14 @@ public class SceneLoadManager : MonoBehaviour
     }
 
     public void SceneLoad()
+    {
+        if (StateNameController.gamePlayMode == StateNameController.SINGLE_MODE)
+            LoadGameInSingle();
+        else if (StateNameController.gamePlayMode == StateNameController.MULTIPLE_MODE)
+            LoadGameInMultiple();
+    }
+
+    public void LoadGameInSingle()
     {
         string CurrentInstrSelected = SceneBtnSelected.SelectedInstrName;
         string Selectedlevel = currentLevelSelected.levelSelected;
@@ -66,7 +75,28 @@ public class SceneLoadManager : MonoBehaviour
             instrPasstoScene = "Drum";
             SceneManager.LoadScene(1);
         }
+    }
+
+    public void LoadGameInMultiple()
+    {
+        // Determine the room has 4 player
+        if (PhotonNetwork.PlayerList.Length == PhotonNetwork.CurrentRoom.MaxPlayers)
+        {
+            // Get the song and level selection in the room
 
 
+            foreach (var player in PhotonNetwork.PlayerList)
+            {
+                if (player.CustomProperties.ContainsKey(StateNameController.customPropSelectedRole))
+                {
+                    instrPasstoScene = (string)player.CustomProperties[StateNameController.customPropSelectedRole];
+                }
+                else
+                    Debug.LogError("Player should has the role selected!");
+            }
+            SceneManager.LoadScene(4);
+        }
+        else
+            Debug.LogError("Player Length should up to 4 people!");
     }
 }
