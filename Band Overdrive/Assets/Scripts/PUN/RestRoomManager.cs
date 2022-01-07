@@ -182,9 +182,10 @@ public class RestRoomManager : MonoBehaviourPunCallbacks
 
         // RPC update
         // !!To test the multiplayer in one client, set the photonView or set the photonView.IsMine
-        if (photonView)
+        if (photonView.IsMine)
         {
-            photonView.RPC("ChangeRoleSelected", RpcTarget.AllBuffered, m_RoleSelected, m_IsReady);
+            string fromPlayerName = PhotonNetwork.LocalPlayer.NickName;
+            photonView.RPC("ChangeRoleSelected", RpcTarget.AllBuffered, fromPlayerName, m_RoleSelected, m_IsReady);
 
             bool _isEnable = !m_IsReady;
             photonView.RPC("SetButtonInteractable", RpcTarget.AllBuffered, m_RoleSelected, _isEnable);
@@ -230,22 +231,22 @@ public class RestRoomManager : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void ChangeRoleSelected(string roleSelected, bool isReady)
+    void ChangeRoleSelected(string fromPlayer, string roleSelected, bool isReady)
     {
         switch (roleSelected)
         {
             case "Drum":
                 //PhotonNetwork.CurrentRoom.CustomProperties["role_drum"] = true;
-                m_PlayerDrum.text = isReady ? (PhotonNetwork.LocalPlayer.NickName + " Ready") : "Waiting..";
+                m_PlayerDrum.text = isReady ? (fromPlayer + " Ready") : "Waiting..";
                 break;
             case "Guitar":
-                m_PlayerGuitar.text = isReady ? (PhotonNetwork.LocalPlayer.NickName + " Ready") : "Waiting..";
+                m_PlayerGuitar.text = isReady ? (fromPlayer + " Ready") : "Waiting..";
                 break;
             case "Keyboard":
-                m_PlayerKeyboard.text = isReady ? (PhotonNetwork.LocalPlayer.NickName + " Ready") : "Waiting..";
+                m_PlayerKeyboard.text = isReady ? (fromPlayer + " Ready") : "Waiting..";
                 break;
             case "Vocal":
-                m_PlayerVocal.text = isReady ? (PhotonNetwork.LocalPlayer.NickName + " Ready") : "Waiting..";
+                m_PlayerVocal.text = isReady ? (fromPlayer + " Ready") : "Waiting..";
                 break;
             default: break;
         }
