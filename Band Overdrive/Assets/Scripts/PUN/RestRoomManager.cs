@@ -71,31 +71,46 @@ public class RestRoomManager : MonoBehaviourPunCallbacks
                     }
                 }
             }
-            // If all 4 player is ready, then countdown to start the game for each
-            if (m_IsAllReady && PhotonNetwork.CurrentRoom.PlayerCount == 2)
+
+            if (m_IsAllReady)
             {
-                // Set Master Client to be the Song Selector
-                print("------------- Enter game after 10s --------------");
-                print("-- " + PhotonNetwork.IsMasterClient);
-                if (PhotonNetwork.CurrentRoom.MasterClientId != -1 && PhotonNetwork.IsMasterClient)
-                {
-                    string _currSelectedRole = (string)PhotonNetwork.LocalPlayer.CustomProperties[StateNameController.customPropSelectedRole];
-                    
-                    if (string.IsNullOrEmpty(_currSelectedRole))
-                        Debug.LogError("Must has the role selection for the game start!");
-                    else
-                    {
-                        // Display song selection canvas
-                        UpdateCanvas(false, true);
-                    }
-                }
+                var hashtable = PhotonNetwork.CurrentRoom.CustomProperties;
+                hashtable[StateNameController.roomCustomPropIsAllReady] = true;
+                PhotonNetwork.CurrentRoom.SetCustomProperties(hashtable);
 
                 // Reset the control state
-                var hashtable = PhotonNetwork.LocalPlayer.CustomProperties;
-                hashtable[StateNameController.customPropIsReady] = false;
-                PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
+                var playerCustomProp = PhotonNetwork.LocalPlayer.CustomProperties;
+                playerCustomProp[StateNameController.customPropIsReady] = false;
+                PhotonNetwork.LocalPlayer.SetCustomProperties(playerCustomProp);
                 m_IsAllReady = false;
+
             }
+            // If all 4 player is ready, then countdown to start the game for each
+            //if ((bool)PhotonNetwork.CurrentRoom.CustomProperties[StateNameController.roomCustomPropIsAllReady] 
+            //    && PhotonNetwork.CurrentRoom.PlayerCount == 2)
+            //{
+            //    // Set Master Client to be the Song Selector
+            //    print("------------- Enter game after 10s --------------");
+            //    print("-- " + PhotonNetwork.IsMasterClient);
+            //    if (PhotonNetwork.CurrentRoom.MasterClientId != -1 && PhotonNetwork.IsMasterClient)
+            //    {
+            //        string _currSelectedRole = (string)PhotonNetwork.LocalPlayer.CustomProperties[StateNameController.customPropSelectedRole];
+                    
+            //        if (string.IsNullOrEmpty(_currSelectedRole))
+            //            Debug.LogError("Must has the role selection for the game start!");
+            //        else
+            //        {
+            //            // Display song selection canvas
+            //            UpdateCanvas(false, true);
+            //        }
+            //    }
+
+            //    // Reset the control state
+            //    var hashtable = PhotonNetwork.LocalPlayer.CustomProperties;
+            //    hashtable[StateNameController.customPropIsReady] = false;
+            //    PhotonNetwork.LocalPlayer.SetCustomProperties(hashtable);
+                
+            //}
 
         }
     }
@@ -111,43 +126,57 @@ public class RestRoomManager : MonoBehaviourPunCallbacks
                 StartGameScene();
             }
         }
-        
+
+        if (propertiesThatChanged.ContainsKey(StateNameController.roomCustomPropIsAllReady))
+        {
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && 
+                PhotonNetwork.CurrentRoom.MasterClientId != -1 && PhotonNetwork.IsMasterClient)
+            {
+                string _currSelectedRole = (string)PhotonNetwork.LocalPlayer.CustomProperties[StateNameController.customPropSelectedRole];
+
+                if (string.IsNullOrEmpty(_currSelectedRole))
+                    Debug.LogError("Must has the role selection for the game start!");
+                else
+                {
+                    // Display song selection canvas
+                    UpdateCanvas(false, true);
+                }
+            }
+        }
+
     }
 
     public void StartGameScene()
     {
         // Should be four in the future
-        if (photonView.IsMine)
+        var player = PhotonNetwork.LocalPlayer;
+        if (player.CustomProperties.ContainsKey(StateNameController.customPropSelectedRole))
         {
-            var player = PhotonNetwork.LocalPlayer;
-            if (player.CustomProperties.ContainsKey(StateNameController.customPropSelectedRole))
+            string _selectedRole = (string)player.CustomProperties[StateNameController.customPropSelectedRole];
+            if (!string.IsNullOrEmpty(_selectedRole))
             {
-                string _selectedRole = (string)player.CustomProperties[StateNameController.customPropSelectedRole];
-                if (!string.IsNullOrEmpty(_selectedRole))
+                switch (_selectedRole)
                 {
-                    switch (_selectedRole)
-                    {
-                        case "Drum":
-                            PhotonNetwork.LoadLevel(1);
-                            break;
-                        case "Guitar":
-                            PhotonNetwork.LoadLevel(2);
-                            break;
-                        case "Keyboard":
-                            PhotonNetwork.LoadLevel(3);
-                            break;
-                        case "Vocal":
-                            PhotonNetwork.LoadLevel(4);
-                            break;
-                        default: break;
-                    }
+                    case "Drum":
+                        PhotonNetwork.LoadLevel(1);
+                        break;
+                    case "Guitar":
+                        PhotonNetwork.LoadLevel(2);
+                        break;
+                    case "Keyboard":
+                        PhotonNetwork.LoadLevel(3);
+                        break;
+                    case "Vocal":
+                        PhotonNetwork.LoadLevel(4);
+                        break;
+                    default: break;
                 }
-                else
-                    Debug.LogError("player role should be selected!");
             }
             else
-                Debug.LogError("properties should contain selected_role!");
+                Debug.LogError("player role should be selected!");
         }
+        else
+            Debug.LogError("properties should contain selected_role!");
         //if (PhotonNetwork.PlayerList.Length > 0)
         //{
         //    foreach (var player in PhotonNetwork.PlayerList)

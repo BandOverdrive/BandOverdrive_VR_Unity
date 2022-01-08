@@ -17,6 +17,7 @@ public class StateNameController : MonoBehaviour
     public const string roomCustomPropIsStart = "is_start";
     public const string roomCustomPropSong = "selected_song";
     public const string roomCustomPropLevel = "selected_level";
+    public const string roomCustomPropIsAllReady = "is_all_ready";
     public const int SINGLE_MODE = 0;
     public const int MULTIPLE_MODE = 1;
 

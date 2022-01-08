@@ -45,6 +45,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         roomOptions.CustomRoomProperties.Add(StateNameController.roomCustomPropSong, null);
         roomOptions.CustomRoomProperties.Add(StateNameController.roomCustomPropLevel, null);
         roomOptions.CustomRoomProperties.Add(StateNameController.roomCustomPropIsStart, false);
+        roomOptions.CustomRoomProperties.Add(StateNameController.roomCustomPropIsAllReady, false);
         roomOptions.MaxPlayers = maxPlayersPerRoom;
 
         // Join or create the room
